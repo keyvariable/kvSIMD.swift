@@ -13,7 +13,7 @@ It's checked on macOS and Linux (Ubuntu 22.04).
 
 Simple benchmark console application is provided.
 It's in `/Benchmark` directory.
-It runs on platforms where the SIMD framework is avaialble.
+Benchmark runs on platforms where the SIMD framework is avaialble.
 Recent report is available at `/Benchmark/report.md` path.
 
 
