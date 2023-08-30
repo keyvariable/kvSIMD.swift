@@ -217,9 +217,30 @@ class KvBenchmark {
         WriteLn(stream, "## Hardware")
         Write(stream, "\n")
 
-        WriteLn(stream, "hw.model: \(sysctl(byname: "hw.model") ?? "—")")
-        WriteLn(stream, "hw.machine: \(sysctl(byname: "hw.machine") ?? "—")")
-        Write(stream, "\n")
+        do {
+            let headerRow: (String, String) = ("Key", "Value")
+            let alignment = (Report.Column.Alignment.left, Report.Column.Alignment.left)
+            let rows: [(String, String)] = [
+                ("hw.model", sysctl(byname: "hw.model") ?? "—"),
+                ("hw.machine", sysctl(byname: "hw.machine") ?? "—"),
+            ]
+            let widths = rows.reduce((headerRow.0.count, headerRow.1.count), { (max($0.0, $1.0.count), max($0.1, $1.1.count)) })
+
+
+            func WriteHardwareTableRow(_ row: (String, String)) {
+                WriteLn(stream, " \(alignment.0.format(row.0, width: widths.0)) | \(alignment.1.format(row.1, width: widths.1))")
+            }
+
+            func WriteHardwareTableHeader() {
+                WriteHardwareTableRow(headerRow)
+                WriteLn(stream, "\(alignment.0.tableColumnDeclaration(width: widths.0))|\(alignment.1.tableColumnDeclaration(width: widths.1))")
+            }
+
+
+            WriteHardwareTableHeader()
+            rows.forEach(WriteHardwareTableRow(_:))
+            Write(stream, "\n")
+        }
 
 //        WriteLn(stream, "## Summary")
 //        Write(stream, "\n")

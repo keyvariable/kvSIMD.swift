@@ -17,8 +17,10 @@ Suffixes after function names mean type and number of components in arguments:
 
 ## Hardware
 
-hw.model: iMac18,3
-hw.machine: x86_64
+ Key        | Value   
+:---------- |:-------- 
+ hw.model   | iMac18,3
+ hw.machine | x86_64  
 
 ## Reports
 
