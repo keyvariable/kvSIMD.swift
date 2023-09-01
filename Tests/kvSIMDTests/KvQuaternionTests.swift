@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -16,14 +16,14 @@
 //===----------------------------------------------------------------------===//
 //
 //  KvQuaternionTests.swift
-//  kvSimdImplTests
+//  kvSIMDTests
 //
 //  Created by Svyatoslav Popov on 03.08.2023.
 //
 
 import XCTest
 
-@testable import kvSimdImpl
+@testable import kvSIMD
 
 import simd
 
@@ -62,6 +62,41 @@ final class KvQuaternionTests : XCTestCase {
 
             assertEqual(RandomInputQD(), { QD.init(D3x3($0.subject)) }, { simd.simd_quatd(simd.double3x3($0.reference)) }, IsEqualQ(_:_:))
             assertEqual(RandomInputQD(), { QD.init(D4x4($0.subject)) }, { simd.simd_quatd(simd.double4x4($0.reference)) }, IsEqualQ(_:_:))
+        }
+    }
+
+
+
+    // MARK: testRealImag()
+
+    func testRealImag() {
+        do {
+            let i1 = F3(1.0, 2.0, 3.0), r1 = 4.0 as Float
+            let i2 = F3(5.0, 6.0, 7.0), r2 = 8.0 as Float
+
+            var q = QF(real: r1, imag: i1)
+            XCTAssertEqual(q.real, r1)
+            XCTAssertEqual(q.imag, i1)
+
+            q.real = r2
+            XCTAssertEqual(q.real, r2)
+
+            q.imag = i2
+            XCTAssertEqual(q.imag, i2)
+        }
+        do {
+            let i1 = D3(1.0, 2.0, 3.0), r1 = 4.0 as Double
+            let i2 = D3(5.0, 6.0, 7.0), r2 = 8.0 as Double
+
+            var q = QD(real: r1, imag: i1)
+            XCTAssertEqual(q.real, r1)
+            XCTAssertEqual(q.imag, i1)
+
+            q.real = r2
+            XCTAssertEqual(q.real, r2)
+
+            q.imag = i2
+            XCTAssertEqual(q.imag, i2)
         }
     }
 

@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -16,14 +16,14 @@
 //===----------------------------------------------------------------------===//
 //
 //  KvMatrixTests.swift
-//  kvSimdImplTests
+//  kvSIMDTests
 //
 //  Created by Svyatoslav Popov on 19.08.2023.
 //
 
 import XCTest
 
-@testable import kvSimdImpl
+@testable import kvSIMD
 
 import simd
 
@@ -200,315 +200,321 @@ final class KvMatrixTests : XCTestCase {
 
 
 
-    // MARK: testSubscripts()
+    // MARK: testSubscripts_*()
 
-    func testSubscripts() {
-        do {
-            let m = F2x2(columns: Cols2x2f)
+    func testSubscripts_f() {
 
-            XCTAssertEqual(m[0], Cols2x2f.0)
-            XCTAssertEqual(m[1], Cols2x2f.1)
-
-            XCTAssertEqual(m[0, 0], Cols2x2f.0.x)
-            XCTAssertEqual(m[0, 1], Cols2x2f.0.y)
-            XCTAssertEqual(m[1, 0], Cols2x2f.1.x)
-            XCTAssertEqual(m[1, 1], Cols2x2f.1.y)
-        }
-        do {
-            let m = F2x3(columns: Cols2x3f)
-
-            XCTAssertEqual(m[0], Cols2x3f.0)
-            XCTAssertEqual(m[1], Cols2x3f.1)
-
-            XCTAssertEqual(m[0, 0], Cols2x3f.0.x)
-            XCTAssertEqual(m[0, 1], Cols2x3f.0.y)
-            XCTAssertEqual(m[0, 2], Cols2x3f.0.z)
-            XCTAssertEqual(m[1, 0], Cols2x3f.1.x)
-            XCTAssertEqual(m[1, 1], Cols2x3f.1.y)
-            XCTAssertEqual(m[1, 2], Cols2x3f.1.z)
-        }
-        do {
-            let m = F2x4(columns: Cols2x4f)
-
-            XCTAssertEqual(m[0], Cols2x4f.0)
-            XCTAssertEqual(m[1], Cols2x4f.1)
-
-            XCTAssertEqual(m[0, 0], Cols2x4f.0.x)
-            XCTAssertEqual(m[0, 1], Cols2x4f.0.y)
-            XCTAssertEqual(m[0, 2], Cols2x4f.0.z)
-            XCTAssertEqual(m[0, 3], Cols2x4f.0.w)
-            XCTAssertEqual(m[1, 0], Cols2x4f.1.x)
-            XCTAssertEqual(m[1, 1], Cols2x4f.1.y)
-            XCTAssertEqual(m[1, 2], Cols2x4f.1.z)
-            XCTAssertEqual(m[1, 3], Cols2x4f.1.w)
-        }
-        do {
-            let m = F3x2(columns: Cols3x2f)
-
-            XCTAssertEqual(m[0], Cols3x2f.0)
-            XCTAssertEqual(m[1], Cols3x2f.1)
-            XCTAssertEqual(m[2], Cols3x2f.2)
-
-            XCTAssertEqual(m[0, 0], Cols3x2f.0.x)
-            XCTAssertEqual(m[0, 1], Cols3x2f.0.y)
-            XCTAssertEqual(m[1, 0], Cols3x2f.1.x)
-            XCTAssertEqual(m[1, 1], Cols3x2f.1.y)
-            XCTAssertEqual(m[2, 0], Cols3x2f.2.x)
-            XCTAssertEqual(m[2, 1], Cols3x2f.2.y)
-        }
-        do {
-            let m = F3x3(columns: Cols3x3f)
-
-            XCTAssertEqual(m[0], Cols3x3f.0)
-            XCTAssertEqual(m[1], Cols3x3f.1)
-            XCTAssertEqual(m[2], Cols3x3f.2)
-
-            XCTAssertEqual(m[0, 0], Cols3x3f.0.x)
-            XCTAssertEqual(m[0, 1], Cols3x3f.0.y)
-            XCTAssertEqual(m[0, 2], Cols3x3f.0.z)
-            XCTAssertEqual(m[1, 0], Cols3x3f.1.x)
-            XCTAssertEqual(m[1, 1], Cols3x3f.1.y)
-            XCTAssertEqual(m[1, 2], Cols3x3f.1.z)
-            XCTAssertEqual(m[2, 0], Cols3x3f.2.x)
-            XCTAssertEqual(m[2, 1], Cols3x3f.2.y)
-            XCTAssertEqual(m[2, 2], Cols3x3f.2.z)
-        }
-        do {
-            let m = F3x4(columns: Cols3x4f)
-
-            XCTAssertEqual(m[0], Cols3x4f.0)
-            XCTAssertEqual(m[1], Cols3x4f.1)
-            XCTAssertEqual(m[2], Cols3x4f.2)
-
-            XCTAssertEqual(m[0, 0], Cols3x4f.0.x)
-            XCTAssertEqual(m[0, 1], Cols3x4f.0.y)
-            XCTAssertEqual(m[0, 2], Cols3x4f.0.z)
-            XCTAssertEqual(m[0, 3], Cols3x4f.0.w)
-            XCTAssertEqual(m[1, 0], Cols3x4f.1.x)
-            XCTAssertEqual(m[1, 1], Cols3x4f.1.y)
-            XCTAssertEqual(m[1, 2], Cols3x4f.1.z)
-            XCTAssertEqual(m[1, 3], Cols3x4f.1.w)
-            XCTAssertEqual(m[2, 0], Cols3x4f.2.x)
-            XCTAssertEqual(m[2, 1], Cols3x4f.2.y)
-            XCTAssertEqual(m[2, 2], Cols3x4f.2.z)
-            XCTAssertEqual(m[2, 3], Cols3x4f.2.w)
-        }
-        do {
-            let m = F4x2(columns: Cols4x2f)
-
-            XCTAssertEqual(m[0], Cols4x2f.0)
-            XCTAssertEqual(m[1], Cols4x2f.1)
-            XCTAssertEqual(m[2], Cols4x2f.2)
-            XCTAssertEqual(m[3], Cols4x2f.3)
-
-            XCTAssertEqual(m[0, 0], Cols4x2f.0.x)
-            XCTAssertEqual(m[0, 1], Cols4x2f.0.y)
-            XCTAssertEqual(m[1, 0], Cols4x2f.1.x)
-            XCTAssertEqual(m[1, 1], Cols4x2f.1.y)
-            XCTAssertEqual(m[2, 0], Cols4x2f.2.x)
-            XCTAssertEqual(m[2, 1], Cols4x2f.2.y)
-            XCTAssertEqual(m[3, 0], Cols4x2f.3.x)
-            XCTAssertEqual(m[3, 1], Cols4x2f.3.y)
-        }
-        do {
-            let m = F4x3(columns: Cols4x3f)
-
-            XCTAssertEqual(m[0], Cols4x3f.0)
-            XCTAssertEqual(m[1], Cols4x3f.1)
-            XCTAssertEqual(m[2], Cols4x3f.2)
-            XCTAssertEqual(m[3], Cols4x3f.3)
-
-            XCTAssertEqual(m[0, 0], Cols4x3f.0.x)
-            XCTAssertEqual(m[0, 1], Cols4x3f.0.y)
-            XCTAssertEqual(m[0, 2], Cols4x3f.0.z)
-            XCTAssertEqual(m[1, 0], Cols4x3f.1.x)
-            XCTAssertEqual(m[1, 1], Cols4x3f.1.y)
-            XCTAssertEqual(m[1, 2], Cols4x3f.1.z)
-            XCTAssertEqual(m[2, 0], Cols4x3f.2.x)
-            XCTAssertEqual(m[2, 1], Cols4x3f.2.y)
-            XCTAssertEqual(m[2, 2], Cols4x3f.2.z)
-            XCTAssertEqual(m[3, 0], Cols4x3f.3.x)
-            XCTAssertEqual(m[3, 1], Cols4x3f.3.y)
-            XCTAssertEqual(m[3, 2], Cols4x3f.3.z)
-        }
-        do {
-            let m = F4x4(columns: Cols4x4f)
-
-            XCTAssertEqual(m[0], Cols4x4f.0)
-            XCTAssertEqual(m[1], Cols4x4f.1)
-            XCTAssertEqual(m[2], Cols4x4f.2)
-            XCTAssertEqual(m[3], Cols4x4f.3)
-
-            XCTAssertEqual(m[0, 0], Cols4x4f.0.x)
-            XCTAssertEqual(m[0, 1], Cols4x4f.0.y)
-            XCTAssertEqual(m[0, 2], Cols4x4f.0.z)
-            XCTAssertEqual(m[0, 3], Cols4x4f.0.w)
-            XCTAssertEqual(m[1, 0], Cols4x4f.1.x)
-            XCTAssertEqual(m[1, 1], Cols4x4f.1.y)
-            XCTAssertEqual(m[1, 2], Cols4x4f.1.z)
-            XCTAssertEqual(m[1, 3], Cols4x4f.1.w)
-            XCTAssertEqual(m[2, 0], Cols4x4f.2.x)
-            XCTAssertEqual(m[2, 1], Cols4x4f.2.y)
-            XCTAssertEqual(m[2, 2], Cols4x4f.2.z)
-            XCTAssertEqual(m[2, 3], Cols4x4f.2.w)
-            XCTAssertEqual(m[3, 0], Cols4x4f.3.x)
-            XCTAssertEqual(m[3, 1], Cols4x4f.3.y)
-            XCTAssertEqual(m[3, 2], Cols4x4f.3.z)
-            XCTAssertEqual(m[3, 3], Cols4x4f.3.w)
+        func With<T, C>(_ initialValue: T, _ columns: C, _ body: (inout T, C) -> Void) {
+            var value = initialValue
+            body(&value, columns)
         }
 
-        do {
-            let m = D2x2(columns: Cols2x2d)
-
-            XCTAssertEqual(m[0], Cols2x2d.0)
-            XCTAssertEqual(m[1], Cols2x2d.1)
-
-            XCTAssertEqual(m[0, 0], Cols2x2d.0.x)
-            XCTAssertEqual(m[0, 1], Cols2x2d.0.y)
-            XCTAssertEqual(m[1, 0], Cols2x2d.1.x)
-            XCTAssertEqual(m[1, 1], Cols2x2d.1.y)
+        func Test(action: () -> Void, assertion: () -> Void) {
+            action()
+            assertion()
         }
-        do {
-            let m = D2x3(columns: Cols2x3d)
 
-            XCTAssertEqual(m[0], Cols2x3d.0)
-            XCTAssertEqual(m[1], Cols2x3d.1)
-
-            XCTAssertEqual(m[0, 0], Cols2x3d.0.x)
-            XCTAssertEqual(m[0, 1], Cols2x3d.0.y)
-            XCTAssertEqual(m[0, 2], Cols2x3d.0.z)
-            XCTAssertEqual(m[1, 0], Cols2x3d.1.x)
-            XCTAssertEqual(m[1, 1], Cols2x3d.1.y)
-            XCTAssertEqual(m[1, 2], Cols2x3d.1.z)
+        With(F2x2(0.0), Cols2x2f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
         }
-        do {
-            let m = D2x4(columns: Cols2x4d)
-
-            XCTAssertEqual(m[0], Cols2x4d.0)
-            XCTAssertEqual(m[1], Cols2x4d.1)
-
-            XCTAssertEqual(m[0, 0], Cols2x4d.0.x)
-            XCTAssertEqual(m[0, 1], Cols2x4d.0.y)
-            XCTAssertEqual(m[0, 2], Cols2x4d.0.z)
-            XCTAssertEqual(m[0, 3], Cols2x4d.0.w)
-            XCTAssertEqual(m[1, 0], Cols2x4d.1.x)
-            XCTAssertEqual(m[1, 1], Cols2x4d.1.y)
-            XCTAssertEqual(m[1, 2], Cols2x4d.1.z)
-            XCTAssertEqual(m[1, 3], Cols2x4d.1.w)
+        With(F2x2(0.0), Cols2x2f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
         }
-        do {
-            let m = D3x2(columns: Cols3x2d)
-
-            XCTAssertEqual(m[0], Cols3x2d.0)
-            XCTAssertEqual(m[1], Cols3x2d.1)
-            XCTAssertEqual(m[2], Cols3x2d.2)
-
-            XCTAssertEqual(m[0, 0], Cols3x2d.0.x)
-            XCTAssertEqual(m[0, 1], Cols3x2d.0.y)
-            XCTAssertEqual(m[1, 0], Cols3x2d.1.x)
-            XCTAssertEqual(m[1, 1], Cols3x2d.1.y)
-            XCTAssertEqual(m[2, 0], Cols3x2d.2.x)
-            XCTAssertEqual(m[2, 1], Cols3x2d.2.y)
+        With(F3x2(0.0), Cols3x2f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
         }
-        do {
-            let m = D3x3(columns: Cols3x3d)
-
-            XCTAssertEqual(m[0], Cols3x3d.0)
-            XCTAssertEqual(m[1], Cols3x3d.1)
-            XCTAssertEqual(m[2], Cols3x3d.2)
-
-            XCTAssertEqual(m[0, 0], Cols3x3d.0.x)
-            XCTAssertEqual(m[0, 1], Cols3x3d.0.y)
-            XCTAssertEqual(m[0, 2], Cols3x3d.0.z)
-            XCTAssertEqual(m[1, 0], Cols3x3d.1.x)
-            XCTAssertEqual(m[1, 1], Cols3x3d.1.y)
-            XCTAssertEqual(m[1, 2], Cols3x3d.1.z)
-            XCTAssertEqual(m[2, 0], Cols3x3d.2.x)
-            XCTAssertEqual(m[2, 1], Cols3x3d.2.y)
-            XCTAssertEqual(m[2, 2], Cols3x3d.2.z)
+        With(F3x2(0.0), Cols3x2f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
         }
-        do {
-            let m = D3x4(columns: Cols3x4d)
-
-            XCTAssertEqual(m[0], Cols3x4d.0)
-            XCTAssertEqual(m[1], Cols3x4d.1)
-            XCTAssertEqual(m[2], Cols3x4d.2)
-
-            XCTAssertEqual(m[0, 0], Cols3x4d.0.x)
-            XCTAssertEqual(m[0, 1], Cols3x4d.0.y)
-            XCTAssertEqual(m[0, 2], Cols3x4d.0.z)
-            XCTAssertEqual(m[0, 3], Cols3x4d.0.w)
-            XCTAssertEqual(m[1, 0], Cols3x4d.1.x)
-            XCTAssertEqual(m[1, 1], Cols3x4d.1.y)
-            XCTAssertEqual(m[1, 2], Cols3x4d.1.z)
-            XCTAssertEqual(m[1, 3], Cols3x4d.1.w)
-            XCTAssertEqual(m[2, 0], Cols3x4d.2.x)
-            XCTAssertEqual(m[2, 1], Cols3x4d.2.y)
-            XCTAssertEqual(m[2, 2], Cols3x4d.2.z)
-            XCTAssertEqual(m[2, 3], Cols3x4d.2.w)
+        With(F4x2(0.0), Cols4x2f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+            Test(action: { m[3] = columns.3 }, assertion: { XCTAssertEqual(m[3], columns.3) })
         }
-        do {
-            let m = D4x2(columns: Cols4x2d)
-
-            XCTAssertEqual(m[0], Cols4x2d.0)
-            XCTAssertEqual(m[1], Cols4x2d.1)
-            XCTAssertEqual(m[2], Cols4x2d.2)
-            XCTAssertEqual(m[3], Cols4x2d.3)
-
-            XCTAssertEqual(m[0, 0], Cols4x2d.0.x)
-            XCTAssertEqual(m[0, 1], Cols4x2d.0.y)
-            XCTAssertEqual(m[1, 0], Cols4x2d.1.x)
-            XCTAssertEqual(m[1, 1], Cols4x2d.1.y)
-            XCTAssertEqual(m[2, 0], Cols4x2d.2.x)
-            XCTAssertEqual(m[2, 1], Cols4x2d.2.y)
-            XCTAssertEqual(m[3, 0], Cols4x2d.3.x)
-            XCTAssertEqual(m[3, 1], Cols4x2d.3.y)
+        With(F4x2(0.0), Cols4x2f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[3, 0] = columns.3.x }, assertion: { XCTAssertEqual(m[3, 0], columns.3.x) })
+            Test(action: { m[3, 1] = columns.3.y }, assertion: { XCTAssertEqual(m[3, 1], columns.3.y) })
         }
-        do {
-            let m = D4x3(columns: Cols4x3d)
-
-            XCTAssertEqual(m[0], Cols4x3d.0)
-            XCTAssertEqual(m[1], Cols4x3d.1)
-            XCTAssertEqual(m[2], Cols4x3d.2)
-            XCTAssertEqual(m[3], Cols4x3d.3)
-
-            XCTAssertEqual(m[0, 0], Cols4x3d.0.x)
-            XCTAssertEqual(m[0, 1], Cols4x3d.0.y)
-            XCTAssertEqual(m[0, 2], Cols4x3d.0.z)
-            XCTAssertEqual(m[1, 0], Cols4x3d.1.x)
-            XCTAssertEqual(m[1, 1], Cols4x3d.1.y)
-            XCTAssertEqual(m[1, 2], Cols4x3d.1.z)
-            XCTAssertEqual(m[2, 0], Cols4x3d.2.x)
-            XCTAssertEqual(m[2, 1], Cols4x3d.2.y)
-            XCTAssertEqual(m[2, 2], Cols4x3d.2.z)
-            XCTAssertEqual(m[3, 0], Cols4x3d.3.x)
-            XCTAssertEqual(m[3, 1], Cols4x3d.3.y)
-            XCTAssertEqual(m[3, 2], Cols4x3d.3.z)
+        With(F2x3(0.0), Cols2x3f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
         }
-        do {
-            let m = D4x4(columns: Cols4x4d)
+        With(F2x3(0.0), Cols2x3f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+        }
+        With(F3x3(0.0), Cols3x3f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+        }
+        With(F3x3(0.0), Cols3x3f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[2, 2] = columns.2.z }, assertion: { XCTAssertEqual(m[2, 2], columns.2.z) })
+        }
+        With(F4x3(0.0), Cols4x3f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+            Test(action: { m[3] = columns.3 }, assertion: { XCTAssertEqual(m[3], columns.3) })
+        }
+        With(F4x3(0.0), Cols4x3f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[2, 2] = columns.2.z }, assertion: { XCTAssertEqual(m[2, 2], columns.2.z) })
+            Test(action: { m[3, 0] = columns.3.x }, assertion: { XCTAssertEqual(m[3, 0], columns.3.x) })
+            Test(action: { m[3, 1] = columns.3.y }, assertion: { XCTAssertEqual(m[3, 1], columns.3.y) })
+            Test(action: { m[3, 2] = columns.3.z }, assertion: { XCTAssertEqual(m[3, 2], columns.3.z) })
+        }
+        With(F2x4(0.0), Cols2x4f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+        }
+        With(F2x4(0.0), Cols2x4f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[0, 3] = columns.0.w }, assertion: { XCTAssertEqual(m[0, 3], columns.0.w) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[1, 3] = columns.1.w }, assertion: { XCTAssertEqual(m[1, 3], columns.1.w) })
+        }
+        With(F3x4(0.0), Cols3x4f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+        }
+        With(F3x4(0.0), Cols3x4f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[0, 3] = columns.0.w }, assertion: { XCTAssertEqual(m[0, 3], columns.0.w) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[1, 3] = columns.1.w }, assertion: { XCTAssertEqual(m[1, 3], columns.1.w) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[2, 2] = columns.2.z }, assertion: { XCTAssertEqual(m[2, 2], columns.2.z) })
+            Test(action: { m[2, 3] = columns.2.w }, assertion: { XCTAssertEqual(m[2, 3], columns.2.w) })
+        }
+        With(F4x4(0.0), Cols4x4f) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+            Test(action: { m[3] = columns.3 }, assertion: { XCTAssertEqual(m[3], columns.3) })
+        }
+        With(F4x4(0.0), Cols4x4f) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[0, 3] = columns.0.w }, assertion: { XCTAssertEqual(m[0, 3], columns.0.w) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[1, 3] = columns.1.w }, assertion: { XCTAssertEqual(m[1, 3], columns.1.w) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[2, 2] = columns.2.z }, assertion: { XCTAssertEqual(m[2, 2], columns.2.z) })
+            Test(action: { m[2, 3] = columns.2.w }, assertion: { XCTAssertEqual(m[2, 3], columns.2.w) })
+            Test(action: { m[3, 0] = columns.3.x }, assertion: { XCTAssertEqual(m[3, 0], columns.3.x) })
+            Test(action: { m[3, 1] = columns.3.y }, assertion: { XCTAssertEqual(m[3, 1], columns.3.y) })
+            Test(action: { m[3, 2] = columns.3.z }, assertion: { XCTAssertEqual(m[3, 2], columns.3.z) })
+            Test(action: { m[3, 3] = columns.3.w }, assertion: { XCTAssertEqual(m[3, 3], columns.3.w) })
+        }
+    }
 
-            XCTAssertEqual(m[0], Cols4x4d.0)
-            XCTAssertEqual(m[1], Cols4x4d.1)
-            XCTAssertEqual(m[2], Cols4x4d.2)
-            XCTAssertEqual(m[3], Cols4x4d.3)
+    func testSubscripts_d() {
 
-            XCTAssertEqual(m[0, 0], Cols4x4d.0.x)
-            XCTAssertEqual(m[0, 1], Cols4x4d.0.y)
-            XCTAssertEqual(m[0, 2], Cols4x4d.0.z)
-            XCTAssertEqual(m[0, 3], Cols4x4d.0.w)
-            XCTAssertEqual(m[1, 0], Cols4x4d.1.x)
-            XCTAssertEqual(m[1, 1], Cols4x4d.1.y)
-            XCTAssertEqual(m[1, 2], Cols4x4d.1.z)
-            XCTAssertEqual(m[1, 3], Cols4x4d.1.w)
-            XCTAssertEqual(m[2, 0], Cols4x4d.2.x)
-            XCTAssertEqual(m[2, 1], Cols4x4d.2.y)
-            XCTAssertEqual(m[2, 2], Cols4x4d.2.z)
-            XCTAssertEqual(m[2, 3], Cols4x4d.2.w)
-            XCTAssertEqual(m[3, 0], Cols4x4d.3.x)
-            XCTAssertEqual(m[3, 1], Cols4x4d.3.y)
-            XCTAssertEqual(m[3, 2], Cols4x4d.3.z)
-            XCTAssertEqual(m[3, 3], Cols4x4d.3.w)
+        func With<T, C>(_ initialValue: T, _ columns: C, _ body: (inout T, C) -> Void) {
+            var value = initialValue
+            body(&value, columns)
+        }
+
+        func Test(action: () -> Void, assertion: () -> Void) {
+            action()
+            assertion()
+        }
+
+        With(D2x2(0.0), Cols2x2d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+        }
+        With(D2x2(0.0), Cols2x2d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+        }
+        With(D3x2(0.0), Cols3x2d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+        }
+        With(D3x2(0.0), Cols3x2d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+        }
+        With(D4x2(0.0), Cols4x2d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+            Test(action: { m[3] = columns.3 }, assertion: { XCTAssertEqual(m[3], columns.3) })
+        }
+        With(D4x2(0.0), Cols4x2d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[3, 0] = columns.3.x }, assertion: { XCTAssertEqual(m[3, 0], columns.3.x) })
+            Test(action: { m[3, 1] = columns.3.y }, assertion: { XCTAssertEqual(m[3, 1], columns.3.y) })
+        }
+        With(D2x3(0.0), Cols2x3d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+        }
+        With(D2x3(0.0), Cols2x3d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+        }
+        With(D3x3(0.0), Cols3x3d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+        }
+        With(D3x3(0.0), Cols3x3d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[2, 2] = columns.2.z }, assertion: { XCTAssertEqual(m[2, 2], columns.2.z) })
+        }
+        With(D4x3(0.0), Cols4x3d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+            Test(action: { m[3] = columns.3 }, assertion: { XCTAssertEqual(m[3], columns.3) })
+        }
+        With(D4x3(0.0), Cols4x3d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[2, 2] = columns.2.z }, assertion: { XCTAssertEqual(m[2, 2], columns.2.z) })
+            Test(action: { m[3, 0] = columns.3.x }, assertion: { XCTAssertEqual(m[3, 0], columns.3.x) })
+            Test(action: { m[3, 1] = columns.3.y }, assertion: { XCTAssertEqual(m[3, 1], columns.3.y) })
+            Test(action: { m[3, 2] = columns.3.z }, assertion: { XCTAssertEqual(m[3, 2], columns.3.z) })
+        }
+        With(D2x4(0.0), Cols2x4d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+        }
+        With(D2x4(0.0), Cols2x4d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[0, 3] = columns.0.w }, assertion: { XCTAssertEqual(m[0, 3], columns.0.w) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[1, 3] = columns.1.w }, assertion: { XCTAssertEqual(m[1, 3], columns.1.w) })
+        }
+        With(D3x4(0.0), Cols3x4d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+        }
+        With(D3x4(0.0), Cols3x4d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[0, 3] = columns.0.w }, assertion: { XCTAssertEqual(m[0, 3], columns.0.w) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[1, 3] = columns.1.w }, assertion: { XCTAssertEqual(m[1, 3], columns.1.w) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[2, 2] = columns.2.z }, assertion: { XCTAssertEqual(m[2, 2], columns.2.z) })
+            Test(action: { m[2, 3] = columns.2.w }, assertion: { XCTAssertEqual(m[2, 3], columns.2.w) })
+        }
+        With(D4x4(0.0), Cols4x4d) { m, columns in
+            Test(action: { m[0] = columns.0 }, assertion: { XCTAssertEqual(m[0], columns.0) })
+            Test(action: { m[1] = columns.1 }, assertion: { XCTAssertEqual(m[1], columns.1) })
+            Test(action: { m[2] = columns.2 }, assertion: { XCTAssertEqual(m[2], columns.2) })
+            Test(action: { m[3] = columns.3 }, assertion: { XCTAssertEqual(m[3], columns.3) })
+        }
+        With(D4x4(0.0), Cols4x4d) { m, columns in
+            Test(action: { m[0, 0] = columns.0.x }, assertion: { XCTAssertEqual(m[0, 0], columns.0.x) })
+            Test(action: { m[0, 1] = columns.0.y }, assertion: { XCTAssertEqual(m[0, 1], columns.0.y) })
+            Test(action: { m[0, 2] = columns.0.z }, assertion: { XCTAssertEqual(m[0, 2], columns.0.z) })
+            Test(action: { m[0, 3] = columns.0.w }, assertion: { XCTAssertEqual(m[0, 3], columns.0.w) })
+            Test(action: { m[1, 0] = columns.1.x }, assertion: { XCTAssertEqual(m[1, 0], columns.1.x) })
+            Test(action: { m[1, 1] = columns.1.y }, assertion: { XCTAssertEqual(m[1, 1], columns.1.y) })
+            Test(action: { m[1, 2] = columns.1.z }, assertion: { XCTAssertEqual(m[1, 2], columns.1.z) })
+            Test(action: { m[1, 3] = columns.1.w }, assertion: { XCTAssertEqual(m[1, 3], columns.1.w) })
+            Test(action: { m[2, 0] = columns.2.x }, assertion: { XCTAssertEqual(m[2, 0], columns.2.x) })
+            Test(action: { m[2, 1] = columns.2.y }, assertion: { XCTAssertEqual(m[2, 1], columns.2.y) })
+            Test(action: { m[2, 2] = columns.2.z }, assertion: { XCTAssertEqual(m[2, 2], columns.2.z) })
+            Test(action: { m[2, 3] = columns.2.w }, assertion: { XCTAssertEqual(m[2, 3], columns.2.w) })
+            Test(action: { m[3, 0] = columns.3.x }, assertion: { XCTAssertEqual(m[3, 0], columns.3.x) })
+            Test(action: { m[3, 1] = columns.3.y }, assertion: { XCTAssertEqual(m[3, 1], columns.3.y) })
+            Test(action: { m[3, 2] = columns.3.z }, assertion: { XCTAssertEqual(m[3, 2], columns.3.z) })
+            Test(action: { m[3, 3] = columns.3.w }, assertion: { XCTAssertEqual(m[3, 3], columns.3.w) })
         }
     }
 

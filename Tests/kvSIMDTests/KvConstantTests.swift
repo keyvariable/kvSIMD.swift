@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -16,14 +16,14 @@
 //===----------------------------------------------------------------------===//
 //
 //  KvConstantTests.swift
-//  kvSimdImplTests
+//  kvSIMDTests
 //
 //  Created by Svyatoslav Popov on 27.08.2023.
 //
 
 import XCTest
 
-@testable import kvSimdImpl
+@testable import kvSIMD
 
 import simd
 
@@ -34,12 +34,12 @@ final class KvConstantTests : XCTestCase {
     // MARK: test_identity_matrices()
 
     func test_identity_matrices() {
-        assertEqual(kvSimdImpl.matrix_identity_float2x2, simd.matrix_identity_float2x2, IsEqual(_:_:))
-        assertEqual(kvSimdImpl.matrix_identity_float3x3, simd.matrix_identity_float3x3, IsEqual(_:_:))
-        assertEqual(kvSimdImpl.matrix_identity_float4x4, simd.matrix_identity_float4x4, IsEqual(_:_:))
-        assertEqual(kvSimdImpl.matrix_identity_double2x2, simd.matrix_identity_double2x2, IsEqual(_:_:))
-        assertEqual(kvSimdImpl.matrix_identity_double3x3, simd.matrix_identity_double3x3, IsEqual(_:_:))
-        assertEqual(kvSimdImpl.matrix_identity_double4x4, simd.matrix_identity_double4x4, IsEqual(_:_:))
+        assertEqual(kvSIMD.matrix_identity_float2x2, simd.matrix_identity_float2x2, IsEqual(_:_:))
+        assertEqual(kvSIMD.matrix_identity_float3x3, simd.matrix_identity_float3x3, IsEqual(_:_:))
+        assertEqual(kvSIMD.matrix_identity_float4x4, simd.matrix_identity_float4x4, IsEqual(_:_:))
+        assertEqual(kvSIMD.matrix_identity_double2x2, simd.matrix_identity_double2x2, IsEqual(_:_:))
+        assertEqual(kvSIMD.matrix_identity_double3x3, simd.matrix_identity_double3x3, IsEqual(_:_:))
+        assertEqual(kvSIMD.matrix_identity_double4x4, simd.matrix_identity_double4x4, IsEqual(_:_:))
     }
 
 

@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -15,23 +15,10 @@
 //
 //===----------------------------------------------------------------------===//
 //
-//  KvExtensions.swift
-//  kvSimdImpl
+//  kvSIMD_Placeholder.swift
+//  kvSIMD_Placeholder
 //
-//  Created by Svyatoslav Popov on 27.07.2023.
+//  Created by Svyatoslav Popov on 01.09.2023.
 //
 
-
-extension SIMD {
-
-    @available(swift, deprecated: 5, renamed: "init(repeating:)")
-    public init(_ scalar: Self.Scalar) { self.init(repeating: scalar) }
-
-}
-
-extension SIMD where Self.Scalar : FixedWidthInteger {
-
-    @available(swift, deprecated: 5, message: "use `0 &- rhs`")
-    public static prefix func -(rhs: Self) -> Self { 0 &- rhs }
-    
-}
+// The placeholder is empty.

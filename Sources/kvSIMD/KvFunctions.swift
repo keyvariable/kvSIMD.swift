@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@
 //===----------------------------------------------------------------------===//
 //
 //  KvFunctions.swift
-//  kvSimdImpl
+//  kvSIMD
 //
 //  Created by Svyatoslav Popov on 23.07.2023.
 //
@@ -719,115 +719,117 @@ public func cosh(_ x: simd_double8) -> simd_double8 { .init(cosh(x[0]), cosh(x[1
 
 // MARK: - cospi
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 
 @inline(__always)
 @usableFromInline
-internal func __cospi_apple(_ x: simd_float2) -> simd_float2 {
-    .init(__cospif(x.x), __cospif(x.y))
-}
-
-public func __cospi_apple(_ x: simd_float3) -> simd_float3 {
-    .init(__cospif(x.x), __cospif(x.y), __cospif(x.z))
+internal func __cospi_darwin(_ x: simd_float2) -> simd_float2 {
+    .init(Darwin.__cospif(x.x), Darwin.__cospif(x.y))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __cospi_apple(_ x: simd_float4) -> simd_float4 {
-    .init(__cospif(x.x), __cospif(x.y), __cospif(x.z), __cospif(x.w))
+internal func __cospi_darwin(_ x: simd_float3) -> simd_float3 {
+    .init(Darwin.__cospif(x.x), Darwin.__cospif(x.y), Darwin.__cospif(x.z))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __cospi_apple(_ x: simd_float8) -> simd_float8 {
-    .init(__cospif(x[0]), __cospif(x[1]), __cospif(x[2]), __cospif(x[3]), __cospif(x[4]), __cospif(x[5]), __cospif(x[6]), __cospif(x[7]))
+internal func __cospi_darwin(_ x: simd_float4) -> simd_float4 {
+    .init(Darwin.__cospif(x.x), Darwin.__cospif(x.y), Darwin.__cospif(x.z), Darwin.__cospif(x.w))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __cospi_apple(_ x: simd_float16) -> simd_float16 {
-    .init(__cospif(x[0]), __cospif(x[1]), __cospif(x[2]), __cospif(x[3]), __cospif(x[4]), __cospif(x[5]), __cospif(x[6]), __cospif(x[7]), __cospif(x[8]), __cospif(x[9]), __cospif(x[10]), __cospif(x[11]), __cospif(x[12]), __cospif(x[13]), __cospif(x[14]), __cospif(x[15]))
+internal func __cospi_darwin(_ x: simd_float8) -> simd_float8 {
+    .init(Darwin.__cospif(x[0]), Darwin.__cospif(x[1]), Darwin.__cospif(x[2]), Darwin.__cospif(x[3]), Darwin.__cospif(x[4]), Darwin.__cospif(x[5]), Darwin.__cospif(x[6]), Darwin.__cospif(x[7]))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __cospi_apple(_ x: simd_double2) -> simd_double2 {
-    .init(__cospi(x.x), __cospi(x.y))
+internal func __cospi_darwin(_ x: simd_float16) -> simd_float16 {
+    .init(Darwin.__cospif(x[0]), Darwin.__cospif(x[1]), Darwin.__cospif(x[2]), Darwin.__cospif(x[3]), Darwin.__cospif(x[4]), Darwin.__cospif(x[5]), Darwin.__cospif(x[6]), Darwin.__cospif(x[7]), Darwin.__cospif(x[8]), Darwin.__cospif(x[9]), Darwin.__cospif(x[10]), Darwin.__cospif(x[11]), Darwin.__cospif(x[12]), Darwin.__cospif(x[13]), Darwin.__cospif(x[14]), Darwin.__cospif(x[15]))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __cospi_apple(_ x: simd_double3) -> simd_double3 {
-    .init(__cospi(x.x), __cospi(x.y), __cospi(x.z))
+internal func __cospi_darwin(_ x: simd_double2) -> simd_double2 {
+    .init(Darwin.__cospi(x.x), Darwin.__cospi(x.y))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __cospi_apple(_ x: simd_double4) -> simd_double4 {
-    .init(__cospi(x.x), __cospi(x.y), __cospi(x.z), __cospi(x.w))
+internal func __cospi_darwin(_ x: simd_double3) -> simd_double3 {
+    .init(Darwin.__cospi(x.x), Darwin.__cospi(x.y), Darwin.__cospi(x.z))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __cospi_apple(_ x: simd_double8) -> simd_double8 {
-    .init(__cospi(x[0]), __cospi(x[1]), __cospi(x[2]), __cospi(x[3]), __cospi(x[4]), __cospi(x[5]), __cospi(x[6]), __cospi(x[7]))
+internal func __cospi_darwin(_ x: simd_double4) -> simd_double4 {
+    .init(Darwin.__cospi(x.x), Darwin.__cospi(x.y), Darwin.__cospi(x.z), Darwin.__cospi(x.w))
 }
 
-#endif // os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+@inline(__always)
+@usableFromInline
+internal func __cospi_darwin(_ x: simd_double8) -> simd_double8 {
+    .init(Darwin.__cospi(x[0]), Darwin.__cospi(x[1]), Darwin.__cospi(x[2]), Darwin.__cospi(x[3]), Darwin.__cospi(x[4]), Darwin.__cospi(x[5]), Darwin.__cospi(x[6]), Darwin.__cospi(x[7]))
+}
+
+#endif // canImport(Darwin)
 
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_float2) -> simd_float2 { kvSimdImpl.cos(x * Float.pi) }
+internal func __cospi_any(_ x: simd_float2) -> simd_float2 { cos(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_float3) -> simd_float3 { kvSimdImpl.cos(x * Float.pi) }
+internal func __cospi_any(_ x: simd_float3) -> simd_float3 { cos(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_float4) -> simd_float4 { kvSimdImpl.cos(x * Float.pi) }
+internal func __cospi_any(_ x: simd_float4) -> simd_float4 { cos(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_float8) -> simd_float8 { kvSimdImpl.cos(x * Float.pi) }
+internal func __cospi_any(_ x: simd_float8) -> simd_float8 { cos(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_float16) -> simd_float16 { kvSimdImpl.cos(x * Float.pi) }
+internal func __cospi_any(_ x: simd_float16) -> simd_float16 { cos(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_double2) -> simd_double2 { kvSimdImpl.cos(x * Double.pi) }
+internal func __cospi_any(_ x: simd_double2) -> simd_double2 { cos(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_double3) -> simd_double3 { kvSimdImpl.cos(x * Double.pi) }
+internal func __cospi_any(_ x: simd_double3) -> simd_double3 { cos(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_double4) -> simd_double4 { kvSimdImpl.cos(x * Double.pi) }
+internal func __cospi_any(_ x: simd_double4) -> simd_double4 { cos(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __cospi_any(_ x: simd_double8) -> simd_double8 { kvSimdImpl.cos(x * Double.pi) }
+internal func __cospi_any(_ x: simd_double8) -> simd_double8 { cos(x * Double.pi) }
 
 
 /// - Returns: Elementwise cosine of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_float2) -> simd_float2 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -837,8 +839,8 @@ public func cospi(_ x: simd_float2) -> simd_float2 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_float3) -> simd_float3 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -848,8 +850,8 @@ public func cospi(_ x: simd_float3) -> simd_float3 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_float4) -> simd_float4 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -859,8 +861,8 @@ public func cospi(_ x: simd_float4) -> simd_float4 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_float8) -> simd_float8 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -870,8 +872,8 @@ public func cospi(_ x: simd_float8) -> simd_float8 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_float16) -> simd_float16 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -881,8 +883,8 @@ public func cospi(_ x: simd_float16) -> simd_float16 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_double2) -> simd_double2 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -892,8 +894,8 @@ public func cospi(_ x: simd_double2) -> simd_double2 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_double3) -> simd_double3 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -903,8 +905,8 @@ public func cospi(_ x: simd_double3) -> simd_double3 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_double4) -> simd_double4 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -914,8 +916,8 @@ public func cospi(_ x: simd_double4) -> simd_double4 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func cospi(_ x: simd_double8) -> simd_double8 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __cospi_apple(x)
+#if canImport(Darwin)
+    __cospi_darwin(x)
 #else
     __cospi_any(x)
 #endif
@@ -1202,126 +1204,126 @@ public func exp(_ q: simd_quatd) -> simd_quatd {
 internal let __M_LN10F: Float = 2.30258509299404568401799145468436421
 
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_float2) -> simd_float2 {
-    .init(__exp10f(x.x), __exp10f(x.y))
+internal func __exp10_darwin(_ x: simd_float2) -> simd_float2 {
+    .init(Darwin.__exp10f(x.x), Darwin.__exp10f(x.y))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_float3) -> simd_float3 {
-    .init(__exp10f(x.x), __exp10f(x.y), __exp10f(x.z))
+internal func __exp10_darwin(_ x: simd_float3) -> simd_float3 {
+    .init(Darwin.__exp10f(x.x), Darwin.__exp10f(x.y), Darwin.__exp10f(x.z))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_float4) -> simd_float4 {
-    .init(__exp10f(x.x), __exp10f(x.y), __exp10f(x.z), __exp10f(x.w))
+internal func __exp10_darwin(_ x: simd_float4) -> simd_float4 {
+    .init(Darwin.__exp10f(x.x), Darwin.__exp10f(x.y), Darwin.__exp10f(x.z), Darwin.__exp10f(x.w))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_float8) -> simd_float8 {
-    .init(__exp10f(x[0]), __exp10f(x[1]), __exp10f(x[2]), __exp10f(x[3]), __exp10f(x[4]), __exp10f(x[5]), __exp10f(x[6]), __exp10f(x[7]))
+internal func __exp10_darwin(_ x: simd_float8) -> simd_float8 {
+    .init(Darwin.__exp10f(x[0]), Darwin.__exp10f(x[1]), Darwin.__exp10f(x[2]), Darwin.__exp10f(x[3]), Darwin.__exp10f(x[4]), Darwin.__exp10f(x[5]), Darwin.__exp10f(x[6]), Darwin.__exp10f(x[7]))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_float16) -> simd_float16 {
-    .init(__exp10f(x[0]), __exp10f(x[1]), __exp10f(x[2]), __exp10f(x[3]), __exp10f(x[4]), __exp10f(x[5]), __exp10f(x[6]), __exp10f(x[7]), __exp10f(x[8]), __exp10f(x[9]), __exp10f(x[10]), __exp10f(x[11]), __exp10f(x[12]), __exp10f(x[13]), __exp10f(x[14]), __exp10f(x[15]))
+internal func __exp10_darwin(_ x: simd_float16) -> simd_float16 {
+    .init(Darwin.__exp10f(x[0]), Darwin.__exp10f(x[1]), Darwin.__exp10f(x[2]), Darwin.__exp10f(x[3]), Darwin.__exp10f(x[4]), Darwin.__exp10f(x[5]), Darwin.__exp10f(x[6]), Darwin.__exp10f(x[7]), Darwin.__exp10f(x[8]), Darwin.__exp10f(x[9]), Darwin.__exp10f(x[10]), Darwin.__exp10f(x[11]), Darwin.__exp10f(x[12]), Darwin.__exp10f(x[13]), Darwin.__exp10f(x[14]), Darwin.__exp10f(x[15]))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_double2) -> simd_double2 {
-    .init(__exp10(x.x), __exp10(x.y))
+internal func __exp10_darwin(_ x: simd_double2) -> simd_double2 {
+    .init(Darwin.__exp10(x.x), Darwin.__exp10(x.y))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_double3) -> simd_double3 {
-    .init(__exp10(x.x), __exp10(x.y), __exp10(x.z))
+internal func __exp10_darwin(_ x: simd_double3) -> simd_double3 {
+    .init(Darwin.__exp10(x.x), Darwin.__exp10(x.y), Darwin.__exp10(x.z))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_double4) -> simd_double4 {
-    .init(__exp10(x.x), __exp10(x.y), __exp10(x.z), __exp10(x.w))
+internal func __exp10_darwin(_ x: simd_double4) -> simd_double4 {
+    .init(Darwin.__exp10(x.x), Darwin.__exp10(x.y), Darwin.__exp10(x.z), Darwin.__exp10(x.w))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __exp10_apple(_ x: simd_double8) -> simd_double8 {
-    .init(__exp10(x[0]), __exp10(x[1]), __exp10(x[2]), __exp10(x[3]), __exp10(x[4]), __exp10(x[5]), __exp10(x[6]), __exp10(x[7]))
+internal func __exp10_darwin(_ x: simd_double8) -> simd_double8 {
+    .init(Darwin.__exp10(x[0]), Darwin.__exp10(x[1]), Darwin.__exp10(x[2]), Darwin.__exp10(x[3]), Darwin.__exp10(x[4]), Darwin.__exp10(x[5]), Darwin.__exp10(x[6]), Darwin.__exp10(x[7]))
 }
 
-#endif // os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#endif // canImport(Darwin)
 
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_float2) -> simd_float2 {
-    kvSimdImpl.exp(__M_LN10F * x)
+    exp(__M_LN10F * x)
 }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_float3) -> simd_float3 {
-    kvSimdImpl.exp(__M_LN10F * x)
+    exp(__M_LN10F * x)
 }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_float4) -> simd_float4 {
-    kvSimdImpl.exp(__M_LN10F * x)
+    exp(__M_LN10F * x)
 }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_float8) -> simd_float8 {
-    kvSimdImpl.exp(__M_LN10F * x)
+    exp(__M_LN10F * x)
 }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_float16) -> simd_float16 {
-    kvSimdImpl.exp(__M_LN10F * x)
+    exp(__M_LN10F * x)
 }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_double2) -> simd_double2 {
-    kvSimdImpl.exp(M_LN10 * x)
+    exp(M_LN10 * x)
 }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_double3) -> simd_double3 {
-    kvSimdImpl.exp(M_LN10 * x)
+    exp(M_LN10 * x)
 }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_double4) -> simd_double4 {
-    kvSimdImpl.exp(M_LN10 * x)
+    exp(M_LN10 * x)
 }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
 internal func __exp10_any(_ x: simd_double8) -> simd_double8 {
-    kvSimdImpl.exp(M_LN10 * x)
+    exp(M_LN10 * x)
 }
 
 
@@ -1329,8 +1331,8 @@ internal func __exp10_any(_ x: simd_double8) -> simd_double8 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_float2) -> simd_float2 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -1340,8 +1342,8 @@ public func exp10(_ x: simd_float2) -> simd_float2 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_float3) -> simd_float3 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -1351,8 +1353,8 @@ public func exp10(_ x: simd_float3) -> simd_float3 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_float4) -> simd_float4 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -1362,8 +1364,8 @@ public func exp10(_ x: simd_float4) -> simd_float4 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_float8) -> simd_float8 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -1373,8 +1375,8 @@ public func exp10(_ x: simd_float8) -> simd_float8 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_float16) -> simd_float16 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -1384,8 +1386,8 @@ public func exp10(_ x: simd_float16) -> simd_float16 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_double2) -> simd_double2 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -1395,8 +1397,8 @@ public func exp10(_ x: simd_double2) -> simd_double2 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_double3) -> simd_double3 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -1406,8 +1408,8 @@ public func exp10(_ x: simd_double3) -> simd_double3 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_double4) -> simd_double4 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -1417,8 +1419,8 @@ public func exp10(_ x: simd_double4) -> simd_double4 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func exp10(_ x: simd_double8) -> simd_double8 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __exp10_apple(x)
+#if canImport(Darwin)
+    __exp10_darwin(x)
 #else
     __exp10_any(x)
 #endif
@@ -3662,15 +3664,15 @@ public func rsqrt(_ x: Float) -> Float { 1.0 / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func rsqrt(_ x: SIMD2<Float>) -> SIMD2<Float> { SIMD2<Float>.one / kvSimdImpl.sqrt(x) }
+public func rsqrt(_ x: SIMD2<Float>) -> SIMD2<Float> { SIMD2<Float>.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func rsqrt(_ x: SIMD3<Float>) -> SIMD3<Float> { SIMD3<Float>.one / kvSimdImpl.sqrt(x) }
+public func rsqrt(_ x: SIMD3<Float>) -> SIMD3<Float> { SIMD3<Float>.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func rsqrt(_ x: SIMD4<Float>) -> SIMD4<Float> { SIMD4<Float>.one / kvSimdImpl.sqrt(x) }
+public func rsqrt(_ x: SIMD4<Float>) -> SIMD4<Float> { SIMD4<Float>.one / sqrt(x) }
 
 /// - Returns: Reciprocal square root of *x*.
 @inlinable
@@ -3678,15 +3680,15 @@ public func rsqrt(_ x: Double) -> Double { 1.0 / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func rsqrt(_ x: SIMD2<Double>) -> SIMD2<Double> { SIMD2<Double>.one / kvSimdImpl.sqrt(x) }
+public func rsqrt(_ x: SIMD2<Double>) -> SIMD2<Double> { SIMD2<Double>.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func rsqrt(_ x: SIMD3<Double>) -> SIMD3<Double> { SIMD3<Double>.one / kvSimdImpl.sqrt(x) }
+public func rsqrt(_ x: SIMD3<Double>) -> SIMD3<Double> { SIMD3<Double>.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func rsqrt(_ x: SIMD4<Double>) -> SIMD4<Double> { SIMD4<Double>.one / kvSimdImpl.sqrt(x) }
+public func rsqrt(_ x: SIMD4<Double>) -> SIMD4<Double> { SIMD4<Double>.one / sqrt(x) }
 
 
 // MARK: - sign
@@ -5514,8 +5516,8 @@ public func simd_determinant(_ x: simd_double4x4) -> Double { x.determinant }
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-88of5`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-4awj7`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-88of5`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-4awj7`` is called.
 @inlinable
 public func simd_distance(_ x: simd_float2, _ y: simd_float2) -> Float {
 #if __FAST_MATH__
@@ -5527,8 +5529,8 @@ public func simd_distance(_ x: simd_float2, _ y: simd_float2) -> Float {
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-28hd`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-10ldd`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-28hd`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-10ldd`` is called.
 @inlinable
 public func simd_distance(_ x: simd_float3, _ y: simd_float3) -> Float {
 #if __FAST_MATH__
@@ -5540,8 +5542,8 @@ public func simd_distance(_ x: simd_float3, _ y: simd_float3) -> Float {
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-19nl7`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-2pjqw`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-19nl7`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-2pjqw`` is called.
 @inlinable
 public func simd_distance(_ x: simd_float4, _ y: simd_float4) -> Float {
 #if __FAST_MATH__
@@ -5553,8 +5555,8 @@ public func simd_distance(_ x: simd_float4, _ y: simd_float4) -> Float {
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-1625c`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-9guww`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-1625c`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-9guww`` is called.
 @inlinable
 public func simd_distance(_ x: simd_float8, _ y: simd_float8) -> Float {
 #if __FAST_MATH__
@@ -5566,8 +5568,8 @@ public func simd_distance(_ x: simd_float8, _ y: simd_float8) -> Float {
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-3acfn`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-9p2rc`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-3acfn`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-9p2rc`` is called.
 @inlinable
 public func simd_distance(_ x: simd_float16, _ y: simd_float16) -> Float {
 #if __FAST_MATH__
@@ -5579,8 +5581,8 @@ public func simd_distance(_ x: simd_float16, _ y: simd_float16) -> Float {
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-7uk27`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-4aji4`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-7uk27`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-4aji4`` is called.
 @inlinable
 public func simd_distance(_ x: simd_double2, _ y: simd_double2) -> Double {
 #if __FAST_MATH__
@@ -5592,8 +5594,8 @@ public func simd_distance(_ x: simd_double2, _ y: simd_double2) -> Double {
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-5hk81`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-74jn8`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-5hk81`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-74jn8`` is called.
 @inlinable
 public func simd_distance(_ x: simd_double3, _ y: simd_double3) -> Double {
 #if __FAST_MATH__
@@ -5605,8 +5607,8 @@ public func simd_distance(_ x: simd_double3, _ y: simd_double3) -> Double {
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-20hcy`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-m14o`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-20hcy`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-m14o`` is called.
 @inlinable
 public func simd_distance(_ x: simd_double4, _ y: simd_double4) -> Double {
 #if __FAST_MATH__
@@ -5618,8 +5620,8 @@ public func simd_distance(_ x: simd_double4, _ y: simd_double4) -> Double {
 
 /// - Returns: Distance between *x* and *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_distance(_:_:)-9dszu`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_distance(_:_:)-1zned`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_distance(_:_:)-9dszu`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_distance(_:_:)-1zned`` is called.
 @inlinable
 public func simd_distance(_ x: simd_double8, _ y: simd_double8) -> Double {
 #if __FAST_MATH__
@@ -6241,23 +6243,23 @@ public func simd_fast_rsqrt(_ x: Float) -> Float { 1.0 / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_float2) -> simd_float2 { simd_float2.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_float2) -> simd_float2 { simd_float2.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_float3) -> simd_float3 { simd_float3.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_float3) -> simd_float3 { simd_float3.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_float4) -> simd_float4 { simd_float4.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_float4) -> simd_float4 { simd_float4.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_float8) -> simd_float8 { simd_float8.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_float8) -> simd_float8 { simd_float8.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_float16) -> simd_float16 { simd_float16.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_float16) -> simd_float16 { simd_float16.one / sqrt(x) }
 
 /// - Returns: Reciprocal square root of *x*.
 @inlinable
@@ -6265,19 +6267,19 @@ public func simd_fast_rsqrt(_ x: Double) -> Double { 1.0 / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_double2) -> simd_double2 { simd_double2.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_double2) -> simd_double2 { simd_double2.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_double3) -> simd_double3 { simd_double3.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_double3) -> simd_double3 { simd_double3.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_double4) -> simd_double4 { simd_double4.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_double4) -> simd_double4 { simd_double4.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_fast_rsqrt(_ x: simd_double8) -> simd_double8 { simd_double8.one / kvSimdImpl.sqrt(x) }
+public func simd_fast_rsqrt(_ x: simd_double8) -> simd_double8 { simd_double8.one / sqrt(x) }
 
 
 // MARK: - simd_fract
@@ -6510,8 +6512,8 @@ public func simd_inverse(_ x: simd_double4x4) -> simd_double4x4 { x.inverse }
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-7tils`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-4tljp`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-7tils`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-4tljp`` is called.
 @inlinable
 public func simd_length(_ x: simd_float2) -> Float {
 #if __FAST_MATH__
@@ -6523,8 +6525,8 @@ public func simd_length(_ x: simd_float2) -> Float {
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-1gc7t`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-1el62`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-1gc7t`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-1el62`` is called.
 @inlinable
 public func simd_length(_ x: simd_float3) -> Float {
 #if __FAST_MATH__
@@ -6536,8 +6538,8 @@ public func simd_length(_ x: simd_float3) -> Float {
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-65ik8`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-1g1lq`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-65ik8`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-1g1lq`` is called.
 @inlinable
 public func simd_length(_ x: simd_float4) -> Float {
 #if __FAST_MATH__
@@ -6549,8 +6551,8 @@ public func simd_length(_ x: simd_float4) -> Float {
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-4c4uu`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-7mhml`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-4c4uu`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-7mhml`` is called.
 @inlinable
 public func simd_length(_ x: simd_float8) -> Float {
 #if __FAST_MATH__
@@ -6562,8 +6564,8 @@ public func simd_length(_ x: simd_float8) -> Float {
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-6874v`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-64n98`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-6874v`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-64n98`` is called.
 @inlinable
 public func simd_length(_ x: simd_float16) -> Float {
 #if __FAST_MATH__
@@ -6575,8 +6577,8 @@ public func simd_length(_ x: simd_float16) -> Float {
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-8u0dv`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-nmzt`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-8u0dv`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-nmzt`` is called.
 @inlinable
 public func simd_length(_ x: simd_double2) -> Double {
 #if __FAST_MATH__
@@ -6588,8 +6590,8 @@ public func simd_length(_ x: simd_double2) -> Double {
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-1u9s`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-67rav`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-1u9s`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-67rav`` is called.
 @inlinable
 public func simd_length(_ x: simd_double3) -> Double {
 #if __FAST_MATH__
@@ -6601,8 +6603,8 @@ public func simd_length(_ x: simd_double3) -> Double {
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-5ak0d`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-370pc`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-5ak0d`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-370pc`` is called.
 @inlinable
 public func simd_length(_ x: simd_double4) -> Double {
 #if __FAST_MATH__
@@ -6614,8 +6616,8 @@ public func simd_length(_ x: simd_double4) -> Double {
 
 /// - Returns: Length of *x* (sqrt(dot(x, x))).
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_length(_:)-2rupi`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_length(_:)-7u64v`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_length(_:)-2rupi`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_length(_:)-7u64v`` is called.
 @inlinable
 public func simd_length(_ x: simd_double8) -> Double {
 #if __FAST_MATH__
@@ -8317,8 +8319,8 @@ public func simd_norm_one(_ x: simd_double8) -> Double { simd_abs(x).sum() }
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-18c9i`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-18c9i`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_float2) -> simd_float2 {
 #if __FAST_MATH__
@@ -8330,8 +8332,8 @@ public func simd_normalize(_ x: simd_float2) -> simd_float2 {
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-9osuc`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-9osuc`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_float3) -> simd_float3 {
 #if __FAST_MATH__
@@ -8343,8 +8345,8 @@ public func simd_normalize(_ x: simd_float3) -> simd_float3 {
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-5uvj2`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-5uvj2`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_float4) -> simd_float4 {
 #if __FAST_MATH__
@@ -8356,8 +8358,8 @@ public func simd_normalize(_ x: simd_float4) -> simd_float4 {
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-9bpya`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-9bpya`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_float8) -> simd_float8 {
 #if __FAST_MATH__
@@ -8369,8 +8371,8 @@ public func simd_normalize(_ x: simd_float8) -> simd_float8 {
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-o2kj`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-o2kj`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_float16) -> simd_float16 {
 #if __FAST_MATH__
@@ -8382,8 +8384,8 @@ public func simd_normalize(_ x: simd_float16) -> simd_float16 {
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-1p5kg`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-1p5kg`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_double2) -> simd_double2 {
 #if __FAST_MATH__
@@ -8395,8 +8397,8 @@ public func simd_normalize(_ x: simd_double2) -> simd_double2 {
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-vpxi`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-vpxi`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_double3) -> simd_double3 {
 #if __FAST_MATH__
@@ -8408,8 +8410,8 @@ public func simd_normalize(_ x: simd_double3) -> simd_double3 {
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-8uvrz`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-8uvrz`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_double4) -> simd_double4 {
 #if __FAST_MATH__
@@ -8421,8 +8423,8 @@ public func simd_normalize(_ x: simd_double4) -> simd_double4 {
 
 /// - Returns: Unit vector having the same direction as *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_normalize(_:)-4rcup`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_normalize(_:)-nrpz`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_normalize(_:)-4rcup`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_normalize(_:)-nrpz`` is called.
 @inlinable
 public func simd_normalize(_ x: simd_double8) -> simd_double8 {
 #if __FAST_MATH__
@@ -8689,23 +8691,23 @@ public func simd_precise_rsqrt(_ x: Float) -> Float { 1.0 / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_float2) -> simd_float2 { simd_float2.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_float2) -> simd_float2 { simd_float2.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_float3) -> simd_float3 { simd_float3.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_float3) -> simd_float3 { simd_float3.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_float4) -> simd_float4 { simd_float4.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_float4) -> simd_float4 { simd_float4.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_float8) -> simd_float8 { simd_float8.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_float8) -> simd_float8 { simd_float8.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_float16) -> simd_float16 { simd_float16.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_float16) -> simd_float16 { simd_float16.one / sqrt(x) }
 
 /// - Returns: Reciprocal square root of *x*.
 @inlinable
@@ -8713,27 +8715,27 @@ public func simd_precise_rsqrt(_ x: Double) -> Double { 1.0 / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_double2) -> simd_double2 { simd_double2.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_double2) -> simd_double2 { simd_double2.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_double3) -> simd_double3 { simd_double3.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_double3) -> simd_double3 { simd_double3.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_double4) -> simd_double4 { simd_double4.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_double4) -> simd_double4 { simd_double4.one / sqrt(x) }
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 @inlinable
-public func simd_precise_rsqrt(_ x: simd_double8) -> simd_double8 { simd_double8.one / kvSimdImpl.sqrt(x) }
+public func simd_precise_rsqrt(_ x: simd_double8) -> simd_double8 { simd_double8.one / sqrt(x) }
 
 
 // MARK: - simd_project
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-1kb50`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-74g1l`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-1kb50`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-74g1l`` is called.
 @inlinable
 public func simd_project(_ x: simd_float2, _ y: simd_float2) -> simd_float2 {
 #if __FAST_MATH__
@@ -8745,8 +8747,8 @@ public func simd_project(_ x: simd_float2, _ y: simd_float2) -> simd_float2 {
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-7x3yu`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-48ojf`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-7x3yu`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-48ojf`` is called.
 @inlinable
 public func simd_project(_ x: simd_float3, _ y: simd_float3) -> simd_float3 {
 #if __FAST_MATH__
@@ -8758,8 +8760,8 @@ public func simd_project(_ x: simd_float3, _ y: simd_float3) -> simd_float3 {
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-87cr5`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-9aw4h`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-87cr5`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-9aw4h`` is called.
 @inlinable
 public func simd_project(_ x: simd_float4, _ y: simd_float4) -> simd_float4 {
 #if __FAST_MATH__
@@ -8771,8 +8773,8 @@ public func simd_project(_ x: simd_float4, _ y: simd_float4) -> simd_float4 {
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-8ag67`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-6t9uh`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-8ag67`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-6t9uh`` is called.
 @inlinable
 public func simd_project(_ x: simd_float8, _ y: simd_float8) -> simd_float8 {
 #if __FAST_MATH__
@@ -8784,8 +8786,8 @@ public func simd_project(_ x: simd_float8, _ y: simd_float8) -> simd_float8 {
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-766k0`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-wglk`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-766k0`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-wglk`` is called.
 @inlinable
 public func simd_project(_ x: simd_float16, _ y: simd_float16) -> simd_float16 {
 #if __FAST_MATH__
@@ -8797,8 +8799,8 @@ public func simd_project(_ x: simd_float16, _ y: simd_float16) -> simd_float16 {
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-3bpwh`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-38qyr`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-3bpwh`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-38qyr`` is called.
 @inlinable
 public func simd_project(_ x: simd_double2, _ y: simd_double2) -> simd_double2 {
 #if __FAST_MATH__
@@ -8810,8 +8812,8 @@ public func simd_project(_ x: simd_double2, _ y: simd_double2) -> simd_double2 {
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-166je`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-3t4vx`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-166je`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-3t4vx`` is called.
 @inlinable
 public func simd_project(_ x: simd_double3, _ y: simd_double3) -> simd_double3 {
 #if __FAST_MATH__
@@ -8823,8 +8825,8 @@ public func simd_project(_ x: simd_double3, _ y: simd_double3) -> simd_double3 {
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-3oga6`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-5yusy`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-3oga6`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-5yusy`` is called.
 @inlinable
 public func simd_project(_ x: simd_double4, _ y: simd_double4) -> simd_double4 {
 #if __FAST_MATH__
@@ -8836,8 +8838,8 @@ public func simd_project(_ x: simd_double4, _ y: simd_double4) -> simd_double4 {
 
 /// - Returns: Projection of *x* onto *y*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_project(_:_:)-16627`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_project(_:_:)-6q5dg`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_project(_:_:)-16627`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_project(_:_:)-6q5dg`` is called.
 @inlinable
 public func simd_project(_ x: simd_double8, _ y: simd_double8) -> simd_double8 {
 #if __FAST_MATH__
@@ -8863,8 +8865,8 @@ public func simd_real(_ q: simd_quatd) -> Double { q.real }
 
 /// - Returns: Reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-7v0tr`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-6fc7x`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-7v0tr`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-6fc7x`` is called.
 @inlinable
 public func simd_recip(_ x: Float) -> Float {
 #if __FAST_MATH__
@@ -8876,8 +8878,8 @@ public func simd_recip(_ x: Float) -> Float {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-8dirl`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-o7aa`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-8dirl`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-o7aa`` is called.
 @inlinable
 public func simd_recip(_ x: simd_float2) -> simd_float2 {
 #if __FAST_MATH__
@@ -8889,8 +8891,8 @@ public func simd_recip(_ x: simd_float2) -> simd_float2 {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-a2qq`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-4vqlb`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-a2qq`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-4vqlb`` is called.
 @inlinable
 public func simd_recip(_ x: simd_float3) -> simd_float3 {
 #if __FAST_MATH__
@@ -8902,8 +8904,8 @@ public func simd_recip(_ x: simd_float3) -> simd_float3 {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-3h3nq`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-5spja`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-3h3nq`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-5spja`` is called.
 @inlinable
 public func simd_recip(_ x: simd_float4) -> simd_float4 {
 #if __FAST_MATH__
@@ -8915,8 +8917,8 @@ public func simd_recip(_ x: simd_float4) -> simd_float4 {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-4okv5`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-1ehtc`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-4okv5`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-1ehtc`` is called.
 @inlinable
 public func simd_recip(_ x: simd_float8) -> simd_float8 {
 #if __FAST_MATH__
@@ -8928,8 +8930,8 @@ public func simd_recip(_ x: simd_float8) -> simd_float8 {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-4lvvn`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-6dq9l`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-4lvvn`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-6dq9l`` is called.
 @inlinable
 public func simd_recip(_ x: simd_float16) -> simd_float16 {
 #if __FAST_MATH__
@@ -8941,8 +8943,8 @@ public func simd_recip(_ x: simd_float16) -> simd_float16 {
 
 /// - Returns: Reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-7v07n`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-6fctx`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-7v07n`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-6fctx`` is called.
 @inlinable
 public func simd_recip(_ x: Double) -> Double {
 #if __FAST_MATH__
@@ -8954,8 +8956,8 @@ public func simd_recip(_ x: Double) -> Double {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-wdm`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-7iwc`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-wdm`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-7iwc`` is called.
 @inlinable
 public func simd_recip(_ x: simd_double2) -> simd_double2 {
 #if __FAST_MATH__
@@ -8967,8 +8969,8 @@ public func simd_recip(_ x: simd_double2) -> simd_double2 {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-8hjdb`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-7upha`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-8hjdb`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-7upha`` is called.
 @inlinable
 public func simd_recip(_ x: simd_double3) -> simd_double3 {
 #if __FAST_MATH__
@@ -8980,8 +8982,8 @@ public func simd_recip(_ x: simd_double3) -> simd_double3 {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-9fr30`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-9rb7f`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-9fr30`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-9rb7f`` is called.
 @inlinable
 public func simd_recip(_ x: simd_double4) -> simd_double4 {
 #if __FAST_MATH__
@@ -8993,8 +8995,8 @@ public func simd_recip(_ x: simd_double4) -> simd_double4 {
 
 /// - Returns: Elementwise reciprocial of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_recip(_:)-nrqg`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_recip(_:)-5ffqh`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_recip(_:)-nrqg`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_recip(_:)-5ffqh`` is called.
 @inlinable
 public func simd_recip(_ x: simd_double8) -> simd_double8 {
 #if __FAST_MATH__
@@ -9750,8 +9752,8 @@ public func simd_refract(_ x: simd_double4, _ n: simd_double4, _ eta: Double) ->
 
 /// - Returns: Reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-6finb`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-7w28g`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-6finb`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-7w28g`` is called.
 @inlinable
 public func simd_rsqrt(_ x: Float) -> Float {
 #if __FAST_MATH__
@@ -9763,8 +9765,8 @@ public func simd_rsqrt(_ x: Float) -> Float {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-54o7j`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-6s6bg`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-54o7j`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-6s6bg`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_float2) -> simd_float2 {
 #if __FAST_MATH__
@@ -9776,8 +9778,8 @@ public func simd_rsqrt(_ x: simd_float2) -> simd_float2 {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-54o7j`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-6s6bg`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-54o7j`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-6s6bg`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_float3) -> simd_float3 {
 #if __FAST_MATH__
@@ -9789,8 +9791,8 @@ public func simd_rsqrt(_ x: simd_float3) -> simd_float3 {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-54o7j`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-6s6bg`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-54o7j`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-6s6bg`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_float4) -> simd_float4 {
 #if __FAST_MATH__
@@ -9802,8 +9804,8 @@ public func simd_rsqrt(_ x: simd_float4) -> simd_float4 {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-2cuek`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-8dq5o`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-2cuek`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-8dq5o`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_float8) -> simd_float8 {
 #if __FAST_MATH__
@@ -9815,8 +9817,8 @@ public func simd_rsqrt(_ x: simd_float8) -> simd_float8 {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-9nus1`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-4ca6`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-9nus1`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-4ca6`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_float16) -> simd_float16 {
 #if __FAST_MATH__
@@ -9828,8 +9830,8 @@ public func simd_rsqrt(_ x: simd_float16) -> simd_float16 {
 
 /// - Returns: Reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-94219`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-d3ua`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-94219`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-d3ua`` is called.
 @inlinable
 public func simd_rsqrt(_ x: Double) -> Double {
 #if __FAST_MATH__
@@ -9841,8 +9843,8 @@ public func simd_rsqrt(_ x: Double) -> Double {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-1e53x`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-57con`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-1e53x`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-57con`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_double2) -> simd_double2 {
 #if __FAST_MATH__
@@ -9854,8 +9856,8 @@ public func simd_rsqrt(_ x: simd_double2) -> simd_double2 {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-39nmm`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-559s4`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-39nmm`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-559s4`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_double3) -> simd_double3 {
 #if __FAST_MATH__
@@ -9867,8 +9869,8 @@ public func simd_rsqrt(_ x: simd_double3) -> simd_double3 {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-6finb`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-7w28g`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-6finb`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-7w28g`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_double4) -> simd_double4 {
 #if __FAST_MATH__
@@ -9880,8 +9882,8 @@ public func simd_rsqrt(_ x: simd_double4) -> simd_double4 {
 
 /// - Returns: Elementwise reciprocal square root of *x*.
 ///
-/// - Note: This function calls ``kvSimdImpl/simd_fast_rsqrt(_:)-2ctsc`` if `-ffast-math` compiler flag is specified.
-///         Otherwise ``kvSimdImpl/simd_precise_rsqrt(_:)-8dqsc`` is called.
+/// - Note: This function calls ``kvSIMD/simd_fast_rsqrt(_:)-2ctsc`` if `-ffast-math` compiler flag is specified.
+///         Otherwise ``kvSIMD/simd_precise_rsqrt(_:)-8dqsc`` is called.
 @inlinable
 public func simd_rsqrt(_ x: simd_double8) -> simd_double8 {
 #if __FAST_MATH__
@@ -10120,10 +10122,10 @@ public func simd_smoothstep(_ edge0: simd_double8, _ edge1: simd_double8, _ x: s
 public func simd_spline(_ q0: simd_quatf, _ q1: simd_quatf, _ q2: simd_quatf, _ q3: simd_quatf, _ t: Float) -> simd_quatf {
 
     func S(_ q0: simd_quatf, _ q1: simd_quatf, _ q2: simd_quatf) -> simd_quatf {
-        let l0 = kvSimdImpl.log(q0 * q1.inverse)
-        let l2 = kvSimdImpl.log(q2 * q1.inverse)
+        let l0 = log(q0 * q1.inverse)
+        let l2 = log(q2 * q1.inverse)
 
-        return q1 * kvSimdImpl.exp(-0.25 * (l0 + l2))
+        return q1 * exp(-0.25 * (l0 + l2))
     }
 
     let s1 = S(q0, q1, q2)
@@ -10139,10 +10141,10 @@ public func simd_spline(_ q0: simd_quatf, _ q1: simd_quatf, _ q2: simd_quatf, _ 
 public func simd_spline(_ q0: simd_quatd, _ q1: simd_quatd, _ q2: simd_quatd, _ q3: simd_quatd, _ t: Double) -> simd_quatd {
 
     func S(_ q0: simd_quatd, _ q1: simd_quatd, _ q2: simd_quatd) -> simd_quatd {
-        let l0 = kvSimdImpl.log(q0 * q1.inverse)
-        let l2 = kvSimdImpl.log(q2 * q1.inverse)
+        let l0 = log(q0 * q1.inverse)
+        let l2 = log(q2 * q1.inverse)
 
-        return q1 * kvSimdImpl.exp(-0.25 * (l0 + l2))
+        return q1 * exp(-0.25 * (l0 + l2))
     }
 
     let s1 = S(q0, q1, q2)
@@ -10519,115 +10521,117 @@ public func sinh(_ x: simd_double8) -> simd_double8 { .init(sinh(x[0]), sinh(x[1
 
 // MARK: - sinpi
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 
 @inline(__always)
 @usableFromInline
-internal func __sinpi_apple(_ x: simd_float2) -> simd_float2 {
-    .init(__sinpif(x.x), __sinpif(x.y))
-}
-
-public func __sinpi_apple(_ x: simd_float3) -> simd_float3 {
-    .init(__sinpif(x.x), __sinpif(x.y), __sinpif(x.z))
+internal func __sinpi_darwin(_ x: simd_float2) -> simd_float2 {
+    .init(Darwin.__sinpif(x.x), Darwin.__sinpif(x.y))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __sinpi_apple(_ x: simd_float4) -> simd_float4 {
-    .init(__sinpif(x.x), __sinpif(x.y), __sinpif(x.z), __sinpif(x.w))
+internal func __sinpi_darwin(_ x: simd_float3) -> simd_float3 {
+    .init(Darwin.__sinpif(x.x), Darwin.__sinpif(x.y), Darwin.__sinpif(x.z))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __sinpi_apple(_ x: simd_float8) -> simd_float8 {
-    .init(__sinpif(x[0]), __sinpif(x[1]), __sinpif(x[2]), __sinpif(x[3]), __sinpif(x[4]), __sinpif(x[5]), __sinpif(x[6]), __sinpif(x[7]))
+internal func __sinpi_darwin(_ x: simd_float4) -> simd_float4 {
+    .init(Darwin.__sinpif(x.x), Darwin.__sinpif(x.y), Darwin.__sinpif(x.z), Darwin.__sinpif(x.w))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __sinpi_apple(_ x: simd_float16) -> simd_float16 {
-    .init(__sinpif(x[0]), __sinpif(x[1]), __sinpif(x[2]), __sinpif(x[3]), __sinpif(x[4]), __sinpif(x[5]), __sinpif(x[6]), __sinpif(x[7]), __sinpif(x[8]), __sinpif(x[9]), __sinpif(x[10]), __sinpif(x[11]), __sinpif(x[12]), __sinpif(x[13]), __sinpif(x[14]), __sinpif(x[15]))
+internal func __sinpi_darwin(_ x: simd_float8) -> simd_float8 {
+    .init(Darwin.__sinpif(x[0]), Darwin.__sinpif(x[1]), Darwin.__sinpif(x[2]), Darwin.__sinpif(x[3]), Darwin.__sinpif(x[4]), Darwin.__sinpif(x[5]), Darwin.__sinpif(x[6]), Darwin.__sinpif(x[7]))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __sinpi_apple(_ x: simd_double2) -> simd_double2 {
-    .init(__sinpi(x.x), __sinpi(x.y))
+internal func __sinpi_darwin(_ x: simd_float16) -> simd_float16 {
+    .init(Darwin.__sinpif(x[0]), Darwin.__sinpif(x[1]), Darwin.__sinpif(x[2]), Darwin.__sinpif(x[3]), Darwin.__sinpif(x[4]), Darwin.__sinpif(x[5]), Darwin.__sinpif(x[6]), Darwin.__sinpif(x[7]), Darwin.__sinpif(x[8]), Darwin.__sinpif(x[9]), Darwin.__sinpif(x[10]), Darwin.__sinpif(x[11]), Darwin.__sinpif(x[12]), Darwin.__sinpif(x[13]), Darwin.__sinpif(x[14]), Darwin.__sinpif(x[15]))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __sinpi_apple(_ x: simd_double3) -> simd_double3 {
-    .init(__sinpi(x.x), __sinpi(x.y), __sinpi(x.z))
+internal func __sinpi_darwin(_ x: simd_double2) -> simd_double2 {
+    .init(Darwin.__sinpi(x.x), Darwin.__sinpi(x.y))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __sinpi_apple(_ x: simd_double4) -> simd_double4 {
-    .init(__sinpi(x.x), __sinpi(x.y), __sinpi(x.z), __sinpi(x.w))
+internal func __sinpi_darwin(_ x: simd_double3) -> simd_double3 {
+    .init(Darwin.__sinpi(x.x), Darwin.__sinpi(x.y), Darwin.__sinpi(x.z))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __sinpi_apple(_ x: simd_double8) -> simd_double8 {
-    .init(__sinpi(x[0]), __sinpi(x[1]), __sinpi(x[2]), __sinpi(x[3]), __sinpi(x[4]), __sinpi(x[5]), __sinpi(x[6]), __sinpi(x[7]))
+internal func __sinpi_darwin(_ x: simd_double4) -> simd_double4 {
+    .init(Darwin.__sinpi(x.x), Darwin.__sinpi(x.y), Darwin.__sinpi(x.z), Darwin.__sinpi(x.w))
 }
 
-#endif // os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+@inline(__always)
+@usableFromInline
+internal func __sinpi_darwin(_ x: simd_double8) -> simd_double8 {
+    .init(Darwin.__sinpi(x[0]), Darwin.__sinpi(x[1]), Darwin.__sinpi(x[2]), Darwin.__sinpi(x[3]), Darwin.__sinpi(x[4]), Darwin.__sinpi(x[5]), Darwin.__sinpi(x[6]), Darwin.__sinpi(x[7]))
+}
+
+#endif // canImport(Darwin)
 
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_float2) -> simd_float2 { kvSimdImpl.sin(x * Float.pi) }
+internal func __sinpi_any(_ x: simd_float2) -> simd_float2 { sin(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_float3) -> simd_float3 { kvSimdImpl.sin(x * Float.pi) }
+internal func __sinpi_any(_ x: simd_float3) -> simd_float3 { sin(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_float4) -> simd_float4 { kvSimdImpl.sin(x * Float.pi) }
+internal func __sinpi_any(_ x: simd_float4) -> simd_float4 { sin(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_float8) -> simd_float8 { kvSimdImpl.sin(x * Float.pi) }
+internal func __sinpi_any(_ x: simd_float8) -> simd_float8 { sin(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_float16) -> simd_float16 { kvSimdImpl.sin(x * Float.pi) }
+internal func __sinpi_any(_ x: simd_float16) -> simd_float16 { sin(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_double2) -> simd_double2 { kvSimdImpl.sin(x * Double.pi) }
+internal func __sinpi_any(_ x: simd_double2) -> simd_double2 { sin(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_double3) -> simd_double3 { kvSimdImpl.sin(x * Double.pi) }
+internal func __sinpi_any(_ x: simd_double3) -> simd_double3 { sin(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_double4) -> simd_double4 { kvSimdImpl.sin(x * Double.pi) }
+internal func __sinpi_any(_ x: simd_double4) -> simd_double4 { sin(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __sinpi_any(_ x: simd_double8) -> simd_double8 { kvSimdImpl.sin(x * Double.pi) }
+internal func __sinpi_any(_ x: simd_double8) -> simd_double8 { sin(x * Double.pi) }
 
 
 /// - Returns: Elementwise sine of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_float2) -> simd_float2 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __sinpi_apple(x)
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
     __sinpi_any(x)
 #endif
@@ -10637,8 +10641,8 @@ public func sinpi(_ x: simd_float2) -> simd_float2 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_float3) -> simd_float3 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __sinpi_apple(x)
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
     __sinpi_any(x)
 #endif
@@ -10648,8 +10652,8 @@ public func sinpi(_ x: simd_float3) -> simd_float3 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_float4) -> simd_float4 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __sinpi_apple(x)
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
     __sinpi_any(x)
 #endif
@@ -10659,8 +10663,8 @@ public func sinpi(_ x: simd_float4) -> simd_float4 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_float8) -> simd_float8 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __sinpi_apple(x)
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
     __sinpi_any(x)
 #endif
@@ -10670,8 +10674,8 @@ public func sinpi(_ x: simd_float8) -> simd_float8 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_float16) -> simd_float16 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __sinpi_apple(x)
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
     __sinpi_any(x)
 #endif
@@ -10681,8 +10685,8 @@ public func sinpi(_ x: simd_float16) -> simd_float16 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_double2) -> simd_double2 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __sinpi_apple(x)
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
     __sinpi_any(x)
 #endif
@@ -10692,10 +10696,10 @@ public func sinpi(_ x: simd_double2) -> simd_double2 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_double3) -> simd_double3 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    .init(__sinpi(x.x), __sinpi(x.y), __sinpi(x.z))
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
-    kvSimdImpl.sin(x * Double.pi)
+    __sinpi_any(x)
 #endif
 }
 
@@ -10703,8 +10707,8 @@ public func sinpi(_ x: simd_double3) -> simd_double3 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_double4) -> simd_double4 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __sinpi_apple(x)
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
     __sinpi_any(x)
 #endif
@@ -10714,8 +10718,8 @@ public func sinpi(_ x: simd_double4) -> simd_double4 {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func sinpi(_ x: simd_double8) -> simd_double8 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __sinpi_apple(x)
+#if canImport(Darwin)
+    __sinpi_darwin(x)
 #else
     __sinpi_any(x)
 #endif
@@ -10930,206 +10934,208 @@ public func tanh(_ x: simd_double8) -> simd_double8 { .init(tanh(x[0]), tanh(x[1
 
 // MARK: - tanpi
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 
 @inline(__always)
 @usableFromInline
-internal func __tanpi_apple(_ x: simd_float2) -> simd_float2 {
-    .init(__tanpif(x.x), __tanpif(x.y))
-}
-
-public func __tanpi_apple(_ x: simd_float3) -> simd_float3 {
-    .init(__tanpif(x.x), __tanpif(x.y), __tanpif(x.z))
+internal func __tanpi_darwin(_ x: simd_float2) -> simd_float2 {
+    .init(Darwin.__tanpif(x.x), Darwin.__tanpif(x.y))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __tanpi_apple(_ x: simd_float4) -> simd_float4 {
-    .init(__tanpif(x.x), __tanpif(x.y), __tanpif(x.z), __tanpif(x.w))
+internal func __tanpi_darwin(_ x: simd_float3) -> simd_float3 {
+    .init(Darwin.__tanpif(x.x), Darwin.__tanpif(x.y), Darwin.__tanpif(x.z))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __tanpi_apple(_ x: simd_float8) -> simd_float8 {
-    .init(__tanpif(x[0]), __tanpif(x[1]), __tanpif(x[2]), __tanpif(x[3]), __tanpif(x[4]), __tanpif(x[5]), __tanpif(x[6]), __tanpif(x[7]))
+internal func __tanpi_darwin(_ x: simd_float4) -> simd_float4 {
+    .init(Darwin.__tanpif(x.x), Darwin.__tanpif(x.y), Darwin.__tanpif(x.z), Darwin.__tanpif(x.w))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __tanpi_apple(_ x: simd_float16) -> simd_float16 {
-    .init(__tanpif(x[0]), __tanpif(x[1]), __tanpif(x[2]), __tanpif(x[3]), __tanpif(x[4]), __tanpif(x[5]), __tanpif(x[6]), __tanpif(x[7]), __tanpif(x[8]), __tanpif(x[9]), __tanpif(x[10]), __tanpif(x[11]), __tanpif(x[12]), __tanpif(x[13]), __tanpif(x[14]), __tanpif(x[15]))
+internal func __tanpi_darwin(_ x: simd_float8) -> simd_float8 {
+    .init(Darwin.__tanpif(x[0]), Darwin.__tanpif(x[1]), Darwin.__tanpif(x[2]), Darwin.__tanpif(x[3]), Darwin.__tanpif(x[4]), Darwin.__tanpif(x[5]), Darwin.__tanpif(x[6]), Darwin.__tanpif(x[7]))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __tanpi_apple(_ x: simd_double2) -> simd_double2 {
-    .init(__tanpi(x.x), __tanpi(x.y))
+internal func __tanpi_darwin(_ x: simd_float16) -> simd_float16 {
+    .init(Darwin.__tanpif(x[0]), Darwin.__tanpif(x[1]), Darwin.__tanpif(x[2]), Darwin.__tanpif(x[3]), Darwin.__tanpif(x[4]), Darwin.__tanpif(x[5]), Darwin.__tanpif(x[6]), Darwin.__tanpif(x[7]), Darwin.__tanpif(x[8]), Darwin.__tanpif(x[9]), Darwin.__tanpif(x[10]), Darwin.__tanpif(x[11]), Darwin.__tanpif(x[12]), Darwin.__tanpif(x[13]), Darwin.__tanpif(x[14]), Darwin.__tanpif(x[15]))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __tanpi_apple(_ x: simd_double3) -> simd_double3 {
-    .init(__tanpi(x.x), __tanpi(x.y), __tanpi(x.z))
+internal func __tanpi_darwin(_ x: simd_double2) -> simd_double2 {
+    .init(Darwin.__tanpi(x.x), Darwin.__tanpi(x.y))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __tanpi_apple(_ x: simd_double4) -> simd_double4 {
-    .init(__tanpi(x.x), __tanpi(x.y), __tanpi(x.z), __tanpi(x.w))
+internal func __tanpi_darwin(_ x: simd_double3) -> simd_double3 {
+    .init(Darwin.__tanpi(x.x), Darwin.__tanpi(x.y), Darwin.__tanpi(x.z))
 }
 
 @inline(__always)
 @usableFromInline
-internal func __tanpi_apple(_ x: simd_double8) -> simd_double8 {
-    .init(__tanpi(x[0]), __tanpi(x[1]), __tanpi(x[2]), __tanpi(x[3]), __tanpi(x[4]), __tanpi(x[5]), __tanpi(x[6]), __tanpi(x[7]))
+internal func __tanpi_darwin(_ x: simd_double4) -> simd_double4 {
+    .init(Darwin.__tanpi(x.x), Darwin.__tanpi(x.y), Darwin.__tanpi(x.z), Darwin.__tanpi(x.w))
 }
 
-#endif // os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+@inline(__always)
+@usableFromInline
+internal func __tanpi_darwin(_ x: simd_double8) -> simd_double8 {
+    .init(Darwin.__tanpi(x[0]), Darwin.__tanpi(x[1]), Darwin.__tanpi(x[2]), Darwin.__tanpi(x[3]), Darwin.__tanpi(x[4]), Darwin.__tanpi(x[5]), Darwin.__tanpi(x[6]), Darwin.__tanpi(x[7]))
+}
+
+#endif // canImport(Darwin)
 
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_float2) -> simd_float2 { kvSimdImpl.tan(x * Float.pi) }
+internal func __tanpi_any(_ x: simd_float2) -> simd_float2 { tan(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_float3) -> simd_float3 { kvSimdImpl.tan(x * Float.pi) }
+internal func __tanpi_any(_ x: simd_float3) -> simd_float3 { tan(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_float4) -> simd_float4 { kvSimdImpl.tan(x * Float.pi) }
+internal func __tanpi_any(_ x: simd_float4) -> simd_float4 { tan(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_float8) -> simd_float8 { kvSimdImpl.tan(x * Float.pi) }
+internal func __tanpi_any(_ x: simd_float8) -> simd_float8 { tan(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_float16) -> simd_float16 { kvSimdImpl.tan(x * Float.pi) }
+internal func __tanpi_any(_ x: simd_float16) -> simd_float16 { tan(x * Float.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_double2) -> simd_double2 { kvSimdImpl.tan(x * Double.pi) }
+internal func __tanpi_any(_ x: simd_double2) -> simd_double2 { tan(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_double3) -> simd_double3 { kvSimdImpl.tan(x * Double.pi) }
+internal func __tanpi_any(_ x: simd_double3) -> simd_double3 { tan(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_double4) -> simd_double4 { kvSimdImpl.tan(x * Double.pi) }
+internal func __tanpi_any(_ x: simd_double4) -> simd_double4 { tan(x * Double.pi) }
 
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inline(__always)
 @usableFromInline
-internal func __tanpi_any(_ x: simd_double8) -> simd_double8 { kvSimdImpl.tan(x * Double.pi) }
+internal func __tanpi_any(_ x: simd_double8) -> simd_double8 { tan(x * Double.pi) }
 
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_float2) -> simd_float2 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_float3) -> simd_float3 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_float4) -> simd_float4 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_float8) -> simd_float8 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_float16) -> simd_float16 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_double2) -> simd_double2 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_double3) -> simd_double3 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_double4) -> simd_double4 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 /// - Returns: Elementwise tangent of *x*∙π.
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @inlinable
 public func tanpi(_ x: simd_double8) -> simd_double8 {
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-    __tanpi_apple(x)
-#else
+#if canImport(Darwin)
+    __tanpi_darwin(x)
+#else // !canImport(Darwin)
     __tanpi_any(x)
-#endif
+#endif // !canImport(Darwin)
 }
 
 

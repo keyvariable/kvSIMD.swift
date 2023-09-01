@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -15,23 +15,23 @@
 //
 //===----------------------------------------------------------------------===//
 //
-//  kvSIMD.swift
+//  KvExtensions.swift
 //  kvSIMD
 //
-//  Created by Svyatoslav Popov on 23.07.2023.
-//
-//
-//===----------------------------------------------------------------------===//
-//
-//  This file selects *SIMD* framework or *kvSimdImpl* whether the framework if available.
+//  Created by Svyatoslav Popov on 27.07.2023.
 //
 
-#if canImport(simd)
 
-import simd
+extension SIMD {
 
-#else // !canImport(simd)
+    @available(swift, deprecated: 5, renamed: "init(repeating:)")
+    public init(_ scalar: Self.Scalar) { self.init(repeating: scalar) }
 
-import kvSimdImpl
+}
 
-#endif // !canImport(simd)
+extension SIMD where Self.Scalar : FixedWidthInteger {
+
+    @available(swift, deprecated: 5, message: "use `0 &- rhs`")
+    public static prefix func -(rhs: Self) -> Self { 0 &- rhs }
+    
+}

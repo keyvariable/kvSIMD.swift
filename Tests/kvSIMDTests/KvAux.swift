@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -16,121 +16,121 @@
 //===----------------------------------------------------------------------===//
 //
 //  KvAux.swift
-//  kvSimdImplTests
+//  kvSIMDTests
 //
 //  Created by Svyatoslav Popov on 22.08.2023.
 //
 
 import XCTest
 
-import kvSimdImpl
+import kvSIMD
 
 import simd
 
 
 
 typealias C1  = CChar
-typealias C2  = kvSimdImpl.simd_char2
-typealias C3  = kvSimdImpl.simd_char3
-typealias C4  = kvSimdImpl.simd_char4
-typealias C8  = kvSimdImpl.simd_char8
-typealias C16 = kvSimdImpl.simd_char16
-typealias C32 = kvSimdImpl.simd_char32
-typealias C64 = kvSimdImpl.simd_char64
+typealias C2  = kvSIMD.simd_char2
+typealias C3  = kvSIMD.simd_char3
+typealias C4  = kvSIMD.simd_char4
+typealias C8  = kvSIMD.simd_char8
+typealias C16 = kvSIMD.simd_char16
+typealias C32 = kvSIMD.simd_char32
+typealias C64 = kvSIMD.simd_char64
 
 typealias UC1  = UInt8
-typealias UC2  = kvSimdImpl.simd_uchar2
-typealias UC3  = kvSimdImpl.simd_uchar3
-typealias UC4  = kvSimdImpl.simd_uchar4
-typealias UC8  = kvSimdImpl.simd_uchar8
-typealias UC16 = kvSimdImpl.simd_uchar16
-typealias UC32 = kvSimdImpl.simd_uchar32
-typealias UC64 = kvSimdImpl.simd_uchar64
+typealias UC2  = kvSIMD.simd_uchar2
+typealias UC3  = kvSIMD.simd_uchar3
+typealias UC4  = kvSIMD.simd_uchar4
+typealias UC8  = kvSIMD.simd_uchar8
+typealias UC16 = kvSIMD.simd_uchar16
+typealias UC32 = kvSIMD.simd_uchar32
+typealias UC64 = kvSIMD.simd_uchar64
 
 typealias S1  = Int16
-typealias S2  = kvSimdImpl.simd_short2
-typealias S3  = kvSimdImpl.simd_short3
-typealias S4  = kvSimdImpl.simd_short4
-typealias S8  = kvSimdImpl.simd_short8
-typealias S16 = kvSimdImpl.simd_short16
-typealias S32 = kvSimdImpl.simd_short32
+typealias S2  = kvSIMD.simd_short2
+typealias S3  = kvSIMD.simd_short3
+typealias S4  = kvSIMD.simd_short4
+typealias S8  = kvSIMD.simd_short8
+typealias S16 = kvSIMD.simd_short16
+typealias S32 = kvSIMD.simd_short32
 
 typealias US1  = UInt16
-typealias US2  = kvSimdImpl.simd_ushort2
-typealias US3  = kvSimdImpl.simd_ushort3
-typealias US4  = kvSimdImpl.simd_ushort4
-typealias US8  = kvSimdImpl.simd_ushort8
-typealias US16 = kvSimdImpl.simd_ushort16
-typealias US32 = kvSimdImpl.simd_ushort32
+typealias US2  = kvSIMD.simd_ushort2
+typealias US3  = kvSIMD.simd_ushort3
+typealias US4  = kvSIMD.simd_ushort4
+typealias US8  = kvSIMD.simd_ushort8
+typealias US16 = kvSIMD.simd_ushort16
+typealias US32 = kvSIMD.simd_ushort32
 
 typealias I1  = Int32
-typealias I2  = kvSimdImpl.simd_int2
-typealias I3  = kvSimdImpl.simd_int3
-typealias I4  = kvSimdImpl.simd_int4
-typealias I8  = kvSimdImpl.simd_int8
-typealias I16 = kvSimdImpl.simd_int16
+typealias I2  = kvSIMD.simd_int2
+typealias I3  = kvSIMD.simd_int3
+typealias I4  = kvSIMD.simd_int4
+typealias I8  = kvSIMD.simd_int8
+typealias I16 = kvSIMD.simd_int16
 
 typealias UI1  = UInt32
-typealias UI2  = kvSimdImpl.simd_uint2
-typealias UI3  = kvSimdImpl.simd_uint3
-typealias UI4  = kvSimdImpl.simd_uint4
-typealias UI8  = kvSimdImpl.simd_uint8
-typealias UI16 = kvSimdImpl.simd_uint16
+typealias UI2  = kvSIMD.simd_uint2
+typealias UI3  = kvSIMD.simd_uint3
+typealias UI4  = kvSIMD.simd_uint4
+typealias UI8  = kvSIMD.simd_uint8
+typealias UI16 = kvSIMD.simd_uint16
 
-typealias L1 = kvSimdImpl.simd_long1
-typealias L2 = kvSimdImpl.simd_long2
-typealias L3 = kvSimdImpl.simd_long3
-typealias L4 = kvSimdImpl.simd_long4
-typealias L8 = kvSimdImpl.simd_long8
+typealias L1 = kvSIMD.simd_long1
+typealias L2 = kvSIMD.simd_long2
+typealias L3 = kvSIMD.simd_long3
+typealias L4 = kvSIMD.simd_long4
+typealias L8 = kvSIMD.simd_long8
 
-typealias UL1 = kvSimdImpl.simd_ulong1
-typealias UL2 = kvSimdImpl.simd_ulong2
-typealias UL3 = kvSimdImpl.simd_ulong3
-typealias UL4 = kvSimdImpl.simd_ulong4
-typealias UL8 = kvSimdImpl.simd_ulong8
+typealias UL1 = kvSIMD.simd_ulong1
+typealias UL2 = kvSIMD.simd_ulong2
+typealias UL3 = kvSIMD.simd_ulong3
+typealias UL4 = kvSIMD.simd_ulong4
+typealias UL8 = kvSIMD.simd_ulong8
 
-typealias F1  = kvSimdImpl.simd_float1
-typealias F2  = kvSimdImpl.simd_float2
-typealias F3  = kvSimdImpl.simd_float3
-typealias F4  = kvSimdImpl.simd_float4
-typealias F8  = kvSimdImpl.simd_float8
-typealias F16 = kvSimdImpl.simd_float16
+typealias F1  = kvSIMD.simd_float1
+typealias F2  = kvSIMD.simd_float2
+typealias F3  = kvSIMD.simd_float3
+typealias F4  = kvSIMD.simd_float4
+typealias F8  = kvSIMD.simd_float8
+typealias F16 = kvSIMD.simd_float16
 
-typealias D1  = kvSimdImpl.simd_double1
-typealias D2  = kvSimdImpl.simd_double2
-typealias D3  = kvSimdImpl.simd_double3
-typealias D4  = kvSimdImpl.simd_double4
-typealias D8  = kvSimdImpl.simd_double8
-
-
-typealias QF = kvSimdImpl.simd_quatf
-typealias QD = kvSimdImpl.simd_quatd
+typealias D1  = kvSIMD.simd_double1
+typealias D2  = kvSIMD.simd_double2
+typealias D3  = kvSIMD.simd_double3
+typealias D4  = kvSIMD.simd_double4
+typealias D8  = kvSIMD.simd_double8
 
 
-typealias F2x2 = kvSimdImpl.simd_float2x2
-typealias F2x3 = kvSimdImpl.simd_float2x3
-typealias F2x4 = kvSimdImpl.simd_float2x4
-
-typealias F3x2 = kvSimdImpl.simd_float3x2
-typealias F3x3 = kvSimdImpl.simd_float3x3
-typealias F3x4 = kvSimdImpl.simd_float3x4
-
-typealias F4x2 = kvSimdImpl.simd_float4x2
-typealias F4x3 = kvSimdImpl.simd_float4x3
-typealias F4x4 = kvSimdImpl.simd_float4x4
+typealias QF = kvSIMD.simd_quatf
+typealias QD = kvSIMD.simd_quatd
 
 
-typealias D2x2 = kvSimdImpl.simd_double2x2
-typealias D2x3 = kvSimdImpl.simd_double2x3
-typealias D2x4 = kvSimdImpl.simd_double2x4
+typealias F2x2 = kvSIMD.simd_float2x2
+typealias F2x3 = kvSIMD.simd_float2x3
+typealias F2x4 = kvSIMD.simd_float2x4
 
-typealias D3x2 = kvSimdImpl.simd_double3x2
-typealias D3x3 = kvSimdImpl.simd_double3x3
-typealias D3x4 = kvSimdImpl.simd_double3x4
+typealias F3x2 = kvSIMD.simd_float3x2
+typealias F3x3 = kvSIMD.simd_float3x3
+typealias F3x4 = kvSIMD.simd_float3x4
 
-typealias D4x2 = kvSimdImpl.simd_double4x2
-typealias D4x3 = kvSimdImpl.simd_double4x3
-typealias D4x4 = kvSimdImpl.simd_double4x4
+typealias F4x2 = kvSIMD.simd_float4x2
+typealias F4x3 = kvSIMD.simd_float4x3
+typealias F4x4 = kvSIMD.simd_float4x4
+
+
+typealias D2x2 = kvSIMD.simd_double2x2
+typealias D2x3 = kvSIMD.simd_double2x3
+typealias D2x4 = kvSIMD.simd_double2x4
+
+typealias D3x2 = kvSIMD.simd_double3x2
+typealias D3x3 = kvSIMD.simd_double3x3
+typealias D3x4 = kvSIMD.simd_double3x4
+
+typealias D4x2 = kvSIMD.simd_double4x2
+typealias D4x3 = kvSIMD.simd_double4x3
+typealias D4x4 = kvSIMD.simd_double4x4
 
 
 typealias EpsF = KvNumericTolerance<Float>
@@ -441,52 +441,52 @@ func IsEqualQ(_ lhs: QD, _ rhs: simd.simd_quatd) -> Bool { IsEqual(lhs.vector, r
 func IsEqualQ(_ lhs: QF, _ rhs: simd.simd_quatf, eps: EpsF) -> Bool { IsEqual(lhs.vector, rhs.vector, eps: eps) }
 func IsEqualQ(_ lhs: QD, _ rhs: simd.simd_quatd, eps: EpsD) -> Bool { IsEqual(lhs.vector, rhs.vector, eps: eps) }
 
-func IsEqual(_ result: kvSimdImpl.simd_float2x2, _ expectation: simd.simd_float2x2) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float2x2, _ expectation: simd.simd_float2x2) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float2x3, _ expectation: simd.simd_float2x3) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float2x3, _ expectation: simd.simd_float2x3) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float2x4, _ expectation: simd.simd_float2x4) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float2x4, _ expectation: simd.simd_float2x4) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float3x2, _ expectation: simd.simd_float3x2) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float3x2, _ expectation: simd.simd_float3x2) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1]) && IsEqual(result[2], expectation[2])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float3x3, _ expectation: simd.simd_float3x3) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float3x3, _ expectation: simd.simd_float3x3) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1]) && IsEqual(result[2], expectation[2])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float3x4, _ expectation: simd.simd_float3x4) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float3x4, _ expectation: simd.simd_float3x4) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1]) && IsEqual(result[2], expectation[2])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float4x2, _ expectation: simd.simd_float4x2) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float4x2, _ expectation: simd.simd_float4x2) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1]) && IsEqual(result[2], expectation[2]) && IsEqual(result[3], expectation[3])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float4x3, _ expectation: simd.simd_float4x3) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float4x3, _ expectation: simd.simd_float4x3) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1]) && IsEqual(result[2], expectation[2]) && IsEqual(result[3], expectation[3])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float4x4, _ expectation: simd.simd_float4x4) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float4x4, _ expectation: simd.simd_float4x4) -> Bool {
     IsEqual(result[0], expectation[0]) && IsEqual(result[1], expectation[1]) && IsEqual(result[2], expectation[2]) && IsEqual(result[3], expectation[3])
 }
 
 
-func IsEqual(_ result: kvSimdImpl.simd_float4x4, _ expectation: simd.simd_float4x4, eps: EpsF) -> Bool {
+func IsEqual(_ result: kvSIMD.simd_float4x4, _ expectation: simd.simd_float4x4, eps: EpsF) -> Bool {
     IsEqual(result[0], expectation[0], eps: eps) && IsEqual(result[1], expectation[1], eps: eps) && IsEqual(result[2], expectation[2], eps: eps) && IsEqual(result[3], expectation[3], eps: eps)
 }
 
@@ -552,6 +552,21 @@ func IsEqualSign<T : BinaryFloatingPoint>(_ lhs: T, _ rhs: T) -> Bool {
 }
 
 
+func AllSatisfy<T : SIMDScalar>(_ x: SIMD2<T>, _ y: SIMD2<T>, predicate: (T, T) -> Bool) -> Bool { predicate(x.x, y.x) && predicate(x.y, y.y) }
+
+func AllSatisfy<T : SIMDScalar>(_ x: SIMD3<T>, _ y: SIMD3<T>, predicate: (T, T) -> Bool) -> Bool { predicate(x.x, y.x) && predicate(x.y, y.y) && predicate(x.z, y.z) }
+
+func AllSatisfy<T : SIMDScalar>(_ x: SIMD4<T>, _ y: SIMD4<T>, predicate: (T, T) -> Bool) -> Bool { predicate(x.x, y.x) && predicate(x.y, y.y) && predicate(x.z, y.z) && predicate(x.w, y.w) }
+
+func AllSatisfy<T : SIMDScalar>(_ x: SIMD8<T>, _ y: SIMD8<T>, predicate: (T, T) -> Bool) -> Bool { AllSatisfy(x.lowHalf, y.lowHalf, predicate: predicate) && AllSatisfy(x.highHalf, y.highHalf, predicate: predicate) }
+
+func AllSatisfy<T : SIMDScalar>(_ x: SIMD16<T>, _ y: SIMD16<T>, predicate: (T, T) -> Bool) -> Bool { AllSatisfy(x.lowHalf, y.lowHalf, predicate: predicate) && AllSatisfy(x.highHalf, y.highHalf, predicate: predicate) }
+
+func AllSatisfy<T : SIMDScalar>(_ x: SIMD32<T>, _ y: SIMD32<T>, predicate: (T, T) -> Bool) -> Bool { AllSatisfy(x.lowHalf, y.lowHalf, predicate: predicate) && AllSatisfy(x.highHalf, y.highHalf, predicate: predicate) }
+
+func AllSatisfy<T : SIMDScalar>(_ x: SIMD64<T>, _ y: SIMD64<T>, predicate: (T, T) -> Bool) -> Bool { AllSatisfy(x.lowHalf, y.lowHalf, predicate: predicate) && AllSatisfy(x.highHalf, y.highHalf, predicate: predicate) }
+
+
 func TestAssert<I, R>(_ input: I, label: @autoclosure () -> String, reference: (I.Element) -> R, subject: (I.Element) -> R, validator: (R, R) -> Bool)
 where I : Sequence
 {
@@ -560,7 +575,7 @@ where I : Sequence
         let expected = reference(input)
 
         if !validator(result, expected) {
-            XCTFail("\(label()) with \(input) input: (\(result)) is not equal to expected (\(expected)) value")
+            XCTFail("\(label()) for \(input): (\(result)) is not equal to expected (\(expected)) value")
         }
     }
 }

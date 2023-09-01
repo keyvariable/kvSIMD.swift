@@ -1,21 +1,20 @@
 # kvSIMD.swift
 
-*kvSIMD.swift* is a crossplatform vectorization-friendly implementation of the SIMD framework interface on Swift.
+*kvSIMD.swift* is a cross-platform vectorization-friendly implementation of the SIMD framework interface on Swift.
 
-Preferred way to import *kvSIMD.swift* is `import kvSIMD`.
-*kvSIMD* module is the same as `import simd` or `import kvSimdImpl` whether the SIMD framework is available.
-Use `import kvSimdImpl` to import custom implementation unconditionally.
+Structure of package is designed to import *kvSIMD.swift* via `import simd` expression when the SIMD framework is unavailable.
+So `import simd` expression imports the SIMD framework if available and *kvSIMD.swift* otherwise.
 
 There are no explicit restrictions for any platform.
 So it's assumed that *kvSIMD.swift* is compiled on any platform Swift is available on.
 It's checked on macOS and Linux (Ubuntu 22.04).
- 
+
 *kvSIMD.swift* is covered by unit-tests.
 
 Simple benchmark console application is provided.
-It's in `/Benchmark` directory.
-Benchmark runs on platforms where the SIMD framework is avaialble.
-Recent report is available at `/Benchmark/report.md` path.
+It's in [`/Benchmark`](./Benchmark) directory.
+Benchmark runs on platforms where the SIMD framework is available.
+Recent report is available at [`/Benchmark/report.md`](./Benchmark/report.md) path.
 
 
 ## Getting Started
@@ -30,7 +29,7 @@ Recent report is available at `/Benchmark/report.md` path.
 ```
 #### Import:
 ```swift
-import kvSIMD
+import simd
 ```
 
 

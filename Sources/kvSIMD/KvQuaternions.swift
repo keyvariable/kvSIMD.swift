@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@
 //===----------------------------------------------------------------------===//
 //
 //  KvQuaternions.swift
-//  kvSimdImpl
+//  kvSIMD
 //
 //  Created by Svyatoslav Popov on 02.08.2023.
 //
@@ -179,11 +179,17 @@ public struct simd_quatf : Equatable, CustomDebugStringConvertible {
 
     /// The scalar (real) part of the receiver.
     @inlinable
-    public var real: Float { vector.w }
+    public var real: Float {
+        get { vector.w }
+        set { vector.w = newValue }
+    }
 
     /// The vector (imaginary) part of the receiver.
     @inlinable
-    public var imag: SIMD3<Float> { simd_make_float3(vector) }
+    public var imag: SIMD3<Float> {
+        get { simd_make_float3(vector) }
+        set { vector = .init(newValue, vector.w) }
+    }
 
     /// The angle of the rotation when the receiver is a unit quaternion.
     @inlinable
@@ -207,7 +213,7 @@ public struct simd_quatf : Equatable, CustomDebugStringConvertible {
 
     /// The length of the receiver.
     @inlinable
-    public var length: Float { kvSimdImpl.length(vector) }
+    public var length: Float { simd_length(vector) }
 
 
     /// - Returns: The result of rotation of given *vector* by the receiver.
@@ -468,11 +474,17 @@ public struct simd_quatd : Equatable, CustomDebugStringConvertible {
 
     /// The scalar (real) part of the receiver.
     @inlinable
-    public var real: Double { vector.w }
+    public var real: Double {
+        get { vector.w }
+        set { vector.w = newValue }
+    }
 
     /// The vector (imaginary) part of the receiver.
     @inlinable
-    public var imag: SIMD3<Double> { simd_make_double3(vector) }
+    public var imag: SIMD3<Double> {
+        get { simd_make_double3(vector) }
+        set { vector = .init(newValue, vector.w) }
+    }
 
     /// The angle of the rotation when the receiver is a unit quaternion.
     @inlinable
@@ -496,7 +508,7 @@ public struct simd_quatd : Equatable, CustomDebugStringConvertible {
 
     /// The length of the receiver.
     @inlinable
-    public var length: Double { kvSimdImpl.length(vector) }
+    public var length: Double { simd_length(vector) }
 
 
     /// - Returns: The result of rotation of given *vector* by the receiver.

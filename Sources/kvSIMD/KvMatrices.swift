@@ -1,6 +1,6 @@
 //===----------------------------------------------------------------------===//
 //
-//  Copyright (c) 2023 Svyatoslav Popov.
+//  Copyright (c) 2023 Svyatoslav Popov (info@keyvar.com).
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 //  the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@
 //===----------------------------------------------------------------------===//
 //
 //  KvMatrices.swift
-//  kvSimdImpl
+//  kvSIMD
 //
 //  Created by Svyatoslav Popov on 02.08.2023.
 //
@@ -95,13 +95,25 @@ public struct simd_float2x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD2<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -109,13 +121,25 @@ public struct simd_float2x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -324,15 +348,29 @@ public struct simd_float3x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD2<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -340,15 +378,29 @@ public struct simd_float3x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -552,17 +604,33 @@ public struct simd_float4x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD2<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        case 3:
-            return columns.3
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            case 3:
+                return columns.3
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            case 3:
+                columns.3 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -570,17 +638,33 @@ public struct simd_float4x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        case 3:
-            return columns.3[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            case 3:
+                return columns.3[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            case 3:
+                columns.3[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -784,13 +868,25 @@ public struct simd_float2x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD3<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -798,13 +894,25 @@ public struct simd_float2x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -1016,15 +1124,29 @@ public struct simd_float3x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD3<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -1032,15 +1154,29 @@ public struct simd_float3x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -1276,17 +1412,33 @@ public struct simd_float4x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD3<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        case 3:
-            return columns.3
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            case 3:
+                return columns.3
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            case 3:
+                columns.3 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -1294,17 +1446,33 @@ public struct simd_float4x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        case 3:
-            return columns.3[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            case 3:
+                return columns.3[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            case 3:
+                columns.3[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -1510,13 +1678,25 @@ public struct simd_float2x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD4<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -1524,13 +1704,25 @@ public struct simd_float2x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -1729,15 +1921,29 @@ public struct simd_float3x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD4<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -1745,15 +1951,29 @@ public struct simd_float3x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -1980,17 +2200,33 @@ public struct simd_float4x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD4<Float> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        case 3:
-            return columns.3
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            case 3:
+                return columns.3
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            case 3:
+                columns.3 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -1998,17 +2234,33 @@ public struct simd_float4x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Float {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        case 3:
-            return columns.3[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            case 3:
+                return columns.3[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            case 3:
+                columns.3[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -2271,13 +2523,25 @@ public struct simd_double2x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD2<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -2285,13 +2549,25 @@ public struct simd_double2x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -2500,15 +2776,29 @@ public struct simd_double3x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD2<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -2516,15 +2806,29 @@ public struct simd_double3x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -2728,17 +3032,33 @@ public struct simd_double4x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD2<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        case 3:
-            return columns.3
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            case 3:
+                return columns.3
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            case 3:
+                columns.3 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -2746,17 +3066,33 @@ public struct simd_double4x2 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        case 3:
-            return columns.3[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            case 3:
+                return columns.3[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            case 3:
+                columns.3[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -2960,13 +3296,25 @@ public struct simd_double2x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD3<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -2974,13 +3322,25 @@ public struct simd_double2x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -3192,15 +3552,29 @@ public struct simd_double3x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD3<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -3208,15 +3582,29 @@ public struct simd_double3x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -3452,17 +3840,33 @@ public struct simd_double4x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD3<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        case 3:
-            return columns.3
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            case 3:
+                return columns.3
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            case 3:
+                columns.3 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -3470,17 +3874,33 @@ public struct simd_double4x3 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        case 3:
-            return columns.3[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            case 3:
+                return columns.3[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self)(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            case 3:
+                columns.3[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -3686,13 +4106,25 @@ public struct simd_double2x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD4<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -3700,13 +4132,25 @@ public struct simd_double2x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -3905,15 +4349,29 @@ public struct simd_double3x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD4<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -3921,15 +4379,29 @@ public struct simd_double3x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
@@ -4156,17 +4628,33 @@ public struct simd_double4x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's column at given index.
     @inlinable
     public subscript(column: Int) -> SIMD4<Double> {
-        switch column {
-        case 0:
-            return columns.0
-        case 1:
-            return columns.1
-        case 2:
-            return columns.2
-        case 3:
-            return columns.3
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0
+            case 1:
+                return columns.1
+            case 2:
+                return columns.2
+            case 3:
+                return columns.3
+            default:
+                preconditionFailure("Failed to get column [\(column)] from \(Self.self). Index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0 = newValue
+            case 1:
+                columns.1 = newValue
+            case 2:
+                columns.2 = newValue
+            case 3:
+                columns.3 = newValue
+            default:
+                preconditionFailure("Failed to set column [\(column)] in \(Self.self). Index is out of range")
+            }
         }
     }
 
@@ -4174,17 +4662,33 @@ public struct simd_double4x4 : Equatable, CustomDebugStringConvertible {
     /// - Returns: The receiver's element at given *column* and *row* indices.
     @inlinable
     public subscript(column: Int, row: Int) -> Double {
-        switch column {
-        case 0:
-            return columns.0[row]
-        case 1:
-            return columns.1[row]
-        case 2:
-            return columns.2[row]
-        case 3:
-            return columns.3[row]
-        default:
-            preconditionFailure()
+        get {
+            switch column {
+            case 0:
+                return columns.0[row]
+            case 1:
+                return columns.1[row]
+            case 2:
+                return columns.2[row]
+            case 3:
+                return columns.3[row]
+            default:
+                preconditionFailure("Failed to get element [\(column), \(row)] from \(Self.self). An index is out of range")
+            }
+        }
+        set {
+            switch column {
+            case 0:
+                columns.0[row] = newValue
+            case 1:
+                columns.1[row] = newValue
+            case 2:
+                columns.2[row] = newValue
+            case 3:
+                columns.3[row] = newValue
+            default:
+                preconditionFailure("Failed to set element [\(column), \(row)] in \(Self.self). An index is out of range")
+            }
         }
     }
 
