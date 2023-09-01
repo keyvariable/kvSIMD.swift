@@ -39,7 +39,8 @@ let placeholderModuleName = "kvSIMD_Placeholder"
 let package = Package(
     name: "kvSIMD.swift",
 
-    products: [ .library(name: "kvSIMD", targets: [ !isSimdAvailable ? moduleName : placeholderModuleName ]) ],
+    products: [ .library(name: "kvSIMD", targets: [ !isSimdAvailable ? moduleName : placeholderModuleName ]),
+                .library(name: "kvSIMD.forced", targets: [ moduleName ])],
 
     targets: Array([
         [ .target(name: moduleName, path: "Sources/kvSIMD", swiftSettings: swiftSettings),
