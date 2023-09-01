@@ -37,7 +37,7 @@ let package = Package(
 
     targets: [
         .executableTarget(name: "kvSimdBenchmark",
-                          dependencies: [ .product(name: "kvSIMD", package: "kvSIMD.swift"),
+                          dependencies: [ .product(name: "kvSIMD.forced", package: "kvSIMD.swift"),
                                           .product(name: "kvKit", package: "kvKit.swift"), ],
                           swiftSettings: swiftSettings),
     ]
