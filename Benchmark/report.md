@@ -6,7 +6,7 @@ and corresponding implementations from *kvSIMD*.
 Let *t₁* is duration of a run with function from the *SIMD* framework,
 *t₂* is duration of a run with correcponding function *kvSIMD*.
 Then the result of a comparison is (*t₂* ÷ *t₁* – 1).
-E.g. if a function from *kvSIMD* is slower by 10% then the resulting value is 0.1.
+E.g. if a function from *kvSIMD* is slower by 10% then the resulting value is +10%.
 
 Values in «Avg.», «σ», «Min.» and «Max.» columns
 are calculated for series of the resulting values described above.

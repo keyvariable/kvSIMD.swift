@@ -202,7 +202,7 @@ class KvBenchmark {
         WriteLn(stream, "Let *t₁* is duration of a run with function from the *SIMD* framework,")
         WriteLn(stream, "*t₂* is duration of a run with correcponding function *kvSIMD*.")
         WriteLn(stream, "Then the result of a comparison is (*t₂* ÷ *t₁* – 1).")
-        WriteLn(stream, "E.g. if a function from *kvSIMD* is slower by 10% then the resulting value is 0.1.")
+        WriteLn(stream, "E.g. if a function from *kvSIMD* is slower by 10% then the resulting value is +10%.")
         Write(stream, "\n")
 
         WriteLn(stream, "Values in «\(Report.Column.avg.label)», «\(Report.Column.standardDeviation.label)», «\(Report.Column.min.label)» and «\(Report.Column.max.label)» columns")
