@@ -17,7 +17,7 @@ Recent report is available at [`/Benchmark/report.md`](./Benchmark/report.md) pa
 
 There are no explicit restrictions for any platform.
 So it's assumed that *kvSIMD.swift* is compiled on any platform Swift is available on.
-It's checked on macOS, Linux (Ubuntu 22.04) and Windows (10 x64).
+Package is built on macOS, Linux (Ubuntu 22.04) and Windows (10 x64).
 
 
 ## Getting Started
