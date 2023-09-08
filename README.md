@@ -5,10 +5,6 @@
 Structure of package is designed to import *kvSIMD.swift* via `import simd` expression when the SIMD framework is unavailable.
 So `import simd` expression imports the SIMD framework if available and *kvSIMD.swift* otherwise.
 
-There are no explicit restrictions for any platform.
-So it's assumed that *kvSIMD.swift* is compiled on any platform Swift is available on.
-It's checked on macOS and Linux (Ubuntu 22.04).
-
 *kvSIMD.swift* is covered by unit-tests.
 
 Simple benchmark console application is provided.
@@ -17,11 +13,18 @@ Benchmark runs on platforms where the SIMD framework is available.
 Recent report is available at [`/Benchmark/report.md`](./Benchmark/report.md) path.
 
 
+## Platforms
+
+There are no explicit restrictions for any platform.
+So it's assumed that *kvSIMD.swift* is compiled on any platform Swift is available on.
+It's checked on macOS, Linux (Ubuntu 22.04) and Windows (10 x64).
+
+
 ## Getting Started
 
 #### Package Dependencies:
 ```swift
-.package(url: "https://github.com/keyvariable/kvSIMD.swift.git", from: "1.0.0")
+.package(url: "https://github.com/keyvariable/kvSIMD.swift.git", from: "1.0.2")
 ```
 #### Target Dependencies:
 ```swift
