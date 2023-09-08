@@ -1203,6 +1203,11 @@ public func exp(_ q: simd_quatd) -> simd_quatd {
 @usableFromInline
 internal let __M_LN10F: Float = 2.30258509299404568401799145468436421
 
+// TODO: Refactor to use the standard constant `M_LN10` from <math.h> when `_USE_MATH_DEFINES` is defined.
+#if os(Windows)
+internal let M_LN10: Double = 2.30258509299404568401799145468436421
+#endif // os(Windows)
+
 
 #if canImport(Darwin)
 
