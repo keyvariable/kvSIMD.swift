@@ -13,7 +13,7 @@ Benchmark runs on platforms where the SIMD framework is available.
 Recent report is available at [`/Benchmark/report.md`](./Benchmark/report.md) path.
 
 
-## Platforms
+## Supported Platforms
 
 There are no explicit restrictions for any platform.
 So it's assumed that *kvSIMD.swift* is compiled on any platform Swift is available on.
