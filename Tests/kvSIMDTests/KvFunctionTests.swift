@@ -2863,11 +2863,7 @@ final class KvFunctionTests : XCTestCase {
         TestAssert(RandomD2s(), RandomD2s(), RandomD2s(), label: "simd_orient-d2d2d2", reference: simd.simd_orient, subject: kvSIMD.simd_orient, validator: IsEqualSign)
 
         TestAssert(RandomF3s(), RandomF3s(), RandomF3s(), RandomF3s(), label: "simd_orient-f3f3f3f3", reference: simd.simd_orient, subject: kvSIMD.simd_orient, validator: IsEqualSign)
-        // TODO: Check if Apple fixed simd_orient-d3d3d3d3. If yes then delete walkaround below using simd_orient-f3f3f3f3.
-        do {
-            let ref: (simd_double3, simd_double3, simd_double3, simd_double3) -> Double = { Double(simd.simd_orient(simd_float3($0), simd_float3($1), simd_float3($2), simd_float3($3))) }
-            TestAssert(RandomD3s(), RandomD3s(), RandomD3s(), RandomD3s(), label: "simd_orient-d3d3d3d3", reference: ref, subject: kvSIMD.simd_orient, validator: IsEqualSign)
-        }
+        TestAssert(RandomD3s(), RandomD3s(), RandomD3s(), RandomD3s(), label: "simd_orient-d3d3d3d3", reference: simd.simd_orient, subject: kvSIMD.simd_orient, validator: IsEqualSign)
     }
 
 
