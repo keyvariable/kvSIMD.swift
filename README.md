@@ -24,7 +24,7 @@ Package is built on macOS, Linux (Ubuntu 22.04) and Windows (10 x64).
 
 #### Package Dependencies:
 ```swift
-.package(url: "https://github.com/keyvariable/kvSIMD.swift.git", from: "1.0.2")
+.package(url: "https://github.com/keyvariable/kvSIMD.swift.git", from: "1.0.3")
 ```
 #### Target Dependencies:
 ```swift
