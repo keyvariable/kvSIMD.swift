@@ -35,6 +35,8 @@ class KvBenchmark {
 
 //    private var totalAccumulator: TimeMeasurement.Accumulator = .init()
 
+    private let systemSleepPreventionToken = KvPowerManagement.preventSystemSleep(reason: "KvBenchmark is active")
+
 
 
     // MARK: .Constants
