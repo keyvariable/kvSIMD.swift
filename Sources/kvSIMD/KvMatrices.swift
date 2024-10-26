@@ -1197,14 +1197,14 @@ public struct simd_float3x3 : Equatable, CustomDebugStringConvertible {
     @inlinable
     public var inverse: simd_float3x3 {
         let col0 = simd_float3(columns.1.y * columns.2.z - columns.1.z * columns.2.y,
-                               columns.2.y * columns.0.z - columns.0.y * columns.2.z,
+                               columns.0.z * columns.2.y - columns.0.y * columns.2.z,
                                columns.0.y * columns.1.z - columns.0.z * columns.1.y)
 
-        let col1 = simd_float3(columns.2.x * columns.1.z - columns.1.x * columns.2.z,
-                               columns.0.x * columns.2.z - columns.2.x * columns.0.z,
+        let col1 = simd_float3(columns.1.z * columns.2.x - columns.1.x * columns.2.z,
+                               columns.0.x * columns.2.z - columns.0.z * columns.2.x,
                                columns.0.z * columns.1.x - columns.0.x * columns.1.z)
 
-        let col2 = simd_float3(columns.1.x * columns.2.y - columns.2.x * columns.1.y,
+        let col2 = simd_float3(columns.1.x * columns.2.y - columns.1.y * columns.2.x,
                                columns.0.y * columns.2.x - columns.0.x * columns.2.y,
                                columns.0.x * columns.1.y - columns.0.y * columns.1.x)
 
@@ -3625,14 +3625,14 @@ public struct simd_double3x3 : Equatable, CustomDebugStringConvertible {
     @inlinable
     public var inverse: simd_double3x3 {
         let col0 = simd_double3(columns.1.y * columns.2.z - columns.1.z * columns.2.y,
-                                columns.2.y * columns.0.z - columns.0.y * columns.2.z,
+                                columns.0.z * columns.2.y - columns.0.y * columns.2.z,
                                 columns.0.y * columns.1.z - columns.0.z * columns.1.y)
 
-        let col1 = simd_double3(columns.2.x * columns.1.z - columns.1.x * columns.2.z,
-                                columns.0.x * columns.2.z - columns.2.x * columns.0.z,
+        let col1 = simd_double3(columns.1.z * columns.2.x - columns.1.x * columns.2.z,
+                                columns.0.x * columns.2.z - columns.0.z * columns.2.x,
                                 columns.0.z * columns.1.x - columns.0.x * columns.1.z)
 
-        let col2 = simd_double3(columns.1.x * columns.2.y - columns.2.x * columns.1.y,
+        let col2 = simd_double3(columns.1.x * columns.2.y - columns.1.y * columns.2.x,
                                 columns.0.y * columns.2.x - columns.0.x * columns.2.y,
                                 columns.0.x * columns.1.y - columns.0.y * columns.1.x)
 
