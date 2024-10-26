@@ -553,26 +553,27 @@ final class KvMatrixTests : XCTestCase {
     // MARK: testInverse()
 
     func testInverse() {
-        let Cols2x2f = (SIMD2<Float>(2, 1), SIMD2<Float>(1, 3))
-        let Cols3x3f = (SIMD3<Float>(2, 1, 1), SIMD3<Float>(1, 3, 1), SIMD3<Float>(1, 1, 4))
-        let Cols4x4f = (SIMD4<Float>(2, 1, 1, 1), SIMD4<Float>(1, 3, 1, 1), SIMD4<Float>(1, 1, 4, 1), SIMD4<Float>(1, 1, 1, 5))
+        let cols2x2f = (SIMD2<Float>(2, 1), SIMD2<Float>(1, 3))
+        let cols3x3f = [
+            (SIMD3<Float>(2, 1, 1), SIMD3<Float>(1, 3, 1), SIMD3<Float>(1, 1, 4)),
+            (SIMD3<Float>(4, 0, -15), SIMD3<Float>(0, 4, -12), SIMD3<Float>(0, 0, 1)),
+        ]
+        let cols4x4f = (SIMD4<Float>(2, 1, 1, 1), SIMD4<Float>(1, 3, 1, 1), SIMD4<Float>(1, 1, 4, 1), SIMD4<Float>(1, 1, 1, 5))
 
-        assertEqual(F2x2(columns: Cols2x2f).inverse, simd.float2x2(columns: Cols2x2f).inverse, IsEqual(_:_:))
-        assertEqual(F3x3(columns: Cols3x3f).inverse, simd.float3x3(columns: Cols3x3f).inverse, IsEqual(_:_:))
-        assertEqual(F4x4(columns: Cols4x4f).inverse, simd.float4x4(columns: Cols4x4f).inverse, IsEqual(_:_:))
+        assertEqual(F2x2(columns: cols2x2f).inverse, simd.float2x2(columns: cols2x2f).inverse, IsEqual(_:_:))
+        cols3x3f.forEach { assertEqual(F3x3(columns: $0).inverse, simd.float3x3(columns: $0).inverse, IsEqual(_:_:)) }
+        assertEqual(F4x4(columns: cols4x4f).inverse, simd.float4x4(columns: cols4x4f).inverse, IsEqual(_:_:))
 
-        let Cols2x2d = (SIMD2<Double>(2, 1), SIMD2<Double>(1, 3))
-        let Cols3x3d = (SIMD3<Double>(2, 1, 1), SIMD3<Double>(1, 3, 1), SIMD3<Double>(1, 1, 4))
-        let Cols4x4d = (SIMD4<Double>(2, 1, 1, 1), SIMD4<Double>(1, 3, 1, 1), SIMD4<Double>(1, 1, 4, 1), SIMD4<Double>(1, 1, 1, 5))
+        let cols2x2d = (SIMD2<Double>(2, 1), SIMD2<Double>(1, 3))
+        let cols3x3d = [
+            (SIMD3<Double>(2, 1, 1), SIMD3<Double>(1, 3, 1), SIMD3<Double>(1, 1, 4)),
+            (SIMD3<Double>(4, 0, -15), SIMD3<Double>(0, 4, -12), SIMD3<Double>(0, 0, 1)),
+        ]
+        let cols4x4d = (SIMD4<Double>(2, 1, 1, 1), SIMD4<Double>(1, 3, 1, 1), SIMD4<Double>(1, 1, 4, 1), SIMD4<Double>(1, 1, 1, 5))
 
-        assertEqual(D2x2(columns: Cols2x2d).inverse, simd.double2x2(columns: Cols2x2d).inverse, IsEqual(_:_:))
-        assertEqual(D3x3(columns: Cols3x3d).inverse, simd.double3x3(columns: Cols3x3d).inverse, IsEqual(_:_:))
-        assertEqual(D4x4(columns: Cols4x4d).inverse, simd.double4x4(columns: Cols4x4d).inverse, IsEqual(_:_:))
-
-        let Cols3x3d1 = (SIMD3<Double>(4, 0, -15), SIMD3<Double>(0, 4, -12), SIMD3<Double>(0, 0, 1))
-        assertEqual(D3x3(columns: Cols3x3d1).inverse, simd.double3x3(columns: Cols3x3d1).inverse, IsEqual(_:_:))
-        let Cols3x3f1 = (SIMD3<Float>(4, 0, -15), SIMD3<Float>(0, 4, -12), SIMD3<Float>(0, 0, 1))
-        assertEqual(F3x3(columns: Cols3x3f1).inverse, simd.float3x3(columns: Cols3x3f1).inverse, IsEqual(_:_:))
+        assertEqual(D2x2(columns: cols2x2d).inverse, simd.double2x2(columns: cols2x2d).inverse, IsEqual(_:_:))
+        cols3x3d.forEach { assertEqual(D3x3(columns: $0).inverse, simd.double3x3(columns: $0).inverse, IsEqual(_:_:)) }
+        assertEqual(D4x4(columns: cols4x4d).inverse, simd.double4x4(columns: cols4x4d).inverse, IsEqual(_:_:))
     }
 
 
