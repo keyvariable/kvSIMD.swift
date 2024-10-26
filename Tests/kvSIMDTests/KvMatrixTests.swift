@@ -568,6 +568,11 @@ final class KvMatrixTests : XCTestCase {
         assertEqual(D2x2(columns: Cols2x2d).inverse, simd.double2x2(columns: Cols2x2d).inverse, IsEqual(_:_:))
         assertEqual(D3x3(columns: Cols3x3d).inverse, simd.double3x3(columns: Cols3x3d).inverse, IsEqual(_:_:))
         assertEqual(D4x4(columns: Cols4x4d).inverse, simd.double4x4(columns: Cols4x4d).inverse, IsEqual(_:_:))
+
+        let Cols3x3d1 = (SIMD3<Double>(4, 0, -15), SIMD3<Double>(0, 4, -12), SIMD3<Double>(0, 0, 1))
+        assertEqual(D3x3(columns: Cols3x3d1).inverse, simd.double3x3(columns: Cols3x3d1).inverse, IsEqual(_:_:))
+        let Cols3x3f1 = (SIMD3<Float>(4, 0, -15), SIMD3<Float>(0, 4, -12), SIMD3<Float>(0, 0, 1))
+        assertEqual(F3x3(columns: Cols3x3f1).inverse, simd.float3x3(columns: Cols3x3f1).inverse, IsEqual(_:_:))
     }
 
 
