@@ -58,22 +58,14 @@ public typealias simd_ushort8 = SIMD8<UInt16>
 public typealias simd_ushort16 = SIMD16<UInt16>
 public typealias simd_ushort32 = SIMD32<UInt16>
 
-#if _pointerBitWidth(_32)
-public typealias simd_int1 = Int
-#else // !_pointerBitWidth(_32)
 public typealias simd_int1 = Int32
-#endif // !_pointerBitWidth(_32)
 public typealias simd_int2 = SIMD2<simd_int1>
 public typealias simd_int3 = SIMD3<simd_int1>
 public typealias simd_int4 = SIMD4<simd_int1>
 public typealias simd_int8 = SIMD8<simd_int1>
 public typealias simd_int16 = SIMD16<simd_int1>
 
-#if _pointerBitWidth(_32)
-public typealias simd_uint1 = UInt
-#else // !_pointerBitWidth(_32)
 public typealias simd_uint1 = UInt32
-#endif // !_pointerBitWidth(_32)
 public typealias simd_uint2 = SIMD2<simd_uint1>
 public typealias simd_uint3 = SIMD3<simd_uint1>
 public typealias simd_uint4 = SIMD4<simd_uint1>
