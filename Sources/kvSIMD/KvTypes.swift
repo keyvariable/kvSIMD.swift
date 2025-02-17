@@ -58,27 +58,43 @@ public typealias simd_ushort8 = SIMD8<UInt16>
 public typealias simd_ushort16 = SIMD16<UInt16>
 public typealias simd_ushort32 = SIMD32<UInt16>
 
+#if _pointerBitWidth(_32)
+public typealias simd_int1 = Int
+#else // !_pointerBitWidth(_32)
 public typealias simd_int1 = Int32
-public typealias simd_int2 = SIMD2<Int32>
-public typealias simd_int3 = SIMD3<Int32>
-public typealias simd_int4 = SIMD4<Int32>
-public typealias simd_int8 = SIMD8<Int32>
-public typealias simd_int16 = SIMD16<Int32>
+#endif // !_pointerBitWidth(_32)
+public typealias simd_int2 = SIMD2<simd_int1>
+public typealias simd_int3 = SIMD3<simd_int1>
+public typealias simd_int4 = SIMD4<simd_int1>
+public typealias simd_int8 = SIMD8<simd_int1>
+public typealias simd_int16 = SIMD16<simd_int1>
 
+#if _pointerBitWidth(_32)
+public typealias simd_uint1 = UInt
+#else // !_pointerBitWidth(_32)
 public typealias simd_uint1 = UInt32
-public typealias simd_uint2 = SIMD2<UInt32>
-public typealias simd_uint3 = SIMD3<UInt32>
-public typealias simd_uint4 = SIMD4<UInt32>
-public typealias simd_uint8 = SIMD8<UInt32>
-public typealias simd_uint16 = SIMD16<UInt32>
+#endif // !_pointerBitWidth(_32)
+public typealias simd_uint2 = SIMD2<simd_uint1>
+public typealias simd_uint3 = SIMD3<simd_uint1>
+public typealias simd_uint4 = SIMD4<simd_uint1>
+public typealias simd_uint8 = SIMD8<simd_uint1>
+public typealias simd_uint16 = SIMD16<simd_uint1>
 
+#if _pointerBitWidth(_64)
 public typealias simd_long1 = Int
+#else // !_pointerBitWidth(_64)
+public typealias simd_long1 = Int64
+#endif // !_pointerBitWidth(_64)
 public typealias simd_long2 = SIMD2<simd_long1>
 public typealias simd_long3 = SIMD3<simd_long1>
 public typealias simd_long4 = SIMD4<simd_long1>
 public typealias simd_long8 = SIMD8<simd_long1>
 
+#if _pointerBitWidth(_64)
 public typealias simd_ulong1 = UInt
+#else // !_pointerBitWidth(_64)
+public typealias simd_ulong1 = UInt64
+#endif // !_pointerBitWidth(_64)
 public typealias simd_ulong2 = SIMD2<simd_ulong1>
 public typealias simd_ulong3 = SIMD3<simd_ulong1>
 public typealias simd_ulong4 = SIMD4<simd_ulong1>
