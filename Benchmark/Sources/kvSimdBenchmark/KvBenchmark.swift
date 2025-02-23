@@ -185,7 +185,7 @@ class KvBenchmark {
             var machine: [CChar] = .init(repeating: 0, count: size)
             guard sysctlbyname(name, &machine, &size, nil, 0) == 0 else { return nil }
 
-            return String(cString: machine)
+            return String(cString: &machine)
         }
 
 

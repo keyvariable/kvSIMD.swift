@@ -25,7 +25,7 @@
 // MARK: - simd_float2x2
 
 /// A matrix with 2 rows and 2 columns.
-public struct simd_float2x2 : Equatable, CustomDebugStringConvertible {
+public struct simd_float2x2 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float2, simd_float2)
 
@@ -275,7 +275,7 @@ public struct simd_float2x2 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_float3x2
 
 /// A matrix with 2 rows and 3 columns.
-public struct simd_float3x2 : Equatable, CustomDebugStringConvertible {
+public struct simd_float3x2 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float2, simd_float2, simd_float2)
 
@@ -528,7 +528,7 @@ public struct simd_float3x2 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_float4x2
 
 /// A matrix with 2 rows and 4 columns.
-public struct simd_float4x2 : Equatable, CustomDebugStringConvertible {
+public struct simd_float4x2 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float2, simd_float2, simd_float2, simd_float2)
 
@@ -798,7 +798,7 @@ public struct simd_float4x2 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_float2x3
 
 /// A matrix with 3 rows and 2 columns.
-public struct simd_float2x3 : Equatable, CustomDebugStringConvertible {
+public struct simd_float2x3 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float3, simd_float3)
 
@@ -1036,7 +1036,7 @@ public struct simd_float2x3 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_float3x3
 
 /// A matrix with 3 rows and 3 columns.
-public struct simd_float3x3 : Equatable, CustomDebugStringConvertible {
+public struct simd_float3x3 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float3, simd_float3, simd_float3)
 
@@ -1336,7 +1336,7 @@ public struct simd_float3x3 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_float4x3
 
 /// A matrix with 3 rows and 4 columns.
-public struct simd_float4x3 : Equatable, CustomDebugStringConvertible {
+public struct simd_float4x3 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float3, simd_float3, simd_float3, simd_float3)
 
@@ -1608,7 +1608,7 @@ public struct simd_float4x3 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_float2x4
 
 /// A matrix with 4 rows and 2 columns.
-public struct simd_float2x4 : Equatable, CustomDebugStringConvertible {
+public struct simd_float2x4 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float4, simd_float4)
 
@@ -1848,7 +1848,7 @@ public struct simd_float2x4 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_float3x4
 
 /// A matrix with 4 rows and 3 columns.
-public struct simd_float3x4 : Equatable, CustomDebugStringConvertible {
+public struct simd_float3x4 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float4, simd_float4, simd_float4)
 
@@ -2105,7 +2105,7 @@ public struct simd_float3x4 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_float4x4
 
 /// A matrix with 4 rows and 4 columns.
-public struct simd_float4x4 : Equatable, CustomDebugStringConvertible {
+public struct simd_float4x4 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_float4, simd_float4, simd_float4, simd_float4)
 
@@ -2453,7 +2453,7 @@ public struct simd_float4x4 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double2x2
 
 /// A matrix with 2 rows and 2 columns.
-public struct simd_double2x2 : Equatable, CustomDebugStringConvertible {
+public struct simd_double2x2 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double2, simd_double2)
 
@@ -2703,7 +2703,7 @@ public struct simd_double2x2 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double3x2
 
 /// A matrix with 2 rows and 3 columns.
-public struct simd_double3x2 : Equatable, CustomDebugStringConvertible {
+public struct simd_double3x2 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double2, simd_double2, simd_double2)
 
@@ -2956,7 +2956,7 @@ public struct simd_double3x2 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double4x2
 
 /// A matrix with 2 rows and 4 columns.
-public struct simd_double4x2 : Equatable, CustomDebugStringConvertible {
+public struct simd_double4x2 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double2, simd_double2, simd_double2, simd_double2)
 
@@ -3226,7 +3226,7 @@ public struct simd_double4x2 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double2x3
 
 /// A matrix with 3 rows and 2 columns.
-public struct simd_double2x3 : Equatable, CustomDebugStringConvertible {
+public struct simd_double2x3 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double3, simd_double3)
 
@@ -3464,7 +3464,7 @@ public struct simd_double2x3 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double3x3
 
 /// A matrix with 3 rows and 3 columns.
-public struct simd_double3x3 : Equatable, CustomDebugStringConvertible {
+public struct simd_double3x3 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double3, simd_double3, simd_double3)
 
@@ -3764,7 +3764,7 @@ public struct simd_double3x3 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double4x3
 
 /// A matrix with 3 rows and 4 columns.
-public struct simd_double4x3 : Equatable, CustomDebugStringConvertible {
+public struct simd_double4x3 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double3, simd_double3, simd_double3, simd_double3)
 
@@ -4036,7 +4036,7 @@ public struct simd_double4x3 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double2x4
 
 /// A matrix with 4 rows and 2 columns.
-public struct simd_double2x4 : Equatable, CustomDebugStringConvertible {
+public struct simd_double2x4 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double4, simd_double4)
 
@@ -4276,7 +4276,7 @@ public struct simd_double2x4 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double3x4
 
 /// A matrix with 4 rows and 3 columns.
-public struct simd_double3x4 : Equatable, CustomDebugStringConvertible {
+public struct simd_double3x4 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double4, simd_double4, simd_double4)
 
@@ -4533,7 +4533,7 @@ public struct simd_double3x4 : Equatable, CustomDebugStringConvertible {
 // MARK: - simd_double4x4
 
 /// A matrix with 4 rows and 4 columns.
-public struct simd_double4x4 : Equatable, CustomDebugStringConvertible {
+public struct simd_double4x4 : Equatable, Sendable, CustomDebugStringConvertible {
 
     public var columns: (simd_double4, simd_double4, simd_double4, simd_double4)
 
